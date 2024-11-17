@@ -15,10 +15,17 @@ AstroTwinColo 2024 tutorial documentation
    :caption: Contents:
    
    instructions.ipynb
-   astrotwin_day_1_hands_on
    pair_counting
-   astrotwin_day_2_hands_on
    get_signals
-   astrotwin_day_3_hands_on
    get_model
-   astrotwin_day_4_hands_on
+
+
+..   astrotwin_day_1_hands_on
+..   pair_counting
+..   astrotwin_day_2_hands_on
+..   get_signals
+..   astrotwin_day_3_hands_on
+..   get_model
+..   astrotwin_day_4_hands_on
+
+
