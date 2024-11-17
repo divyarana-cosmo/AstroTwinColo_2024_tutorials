@@ -23,7 +23,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Day 4 - Model the weak lensing signal" href="get_model.html" />
+    <link rel="next" title="Day 3 Solutions" href="astrotwin_day_3_hands_on.html" />
     <link rel="prev" title="Day 2 Solutions" href="astrotwin_day_2_hands_on.html" /> 
 </head>
 
@@ -64,7 +64,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#The-bias-corrected-measurements">The bias corrected measurements</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="astrotwin_day_3_hands_on.html">Day 3 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get_model.html">Day 4 - Model the weak lensing signal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="astrotwin_day_4_hands_on.html">Day 4 Solutions</a></li>
 </ul>
 
         </div>
@@ -132,7 +134,7 @@
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># selection cut on the lens sample</span>
 <span class="k">def</span> <span class="nf">lens_select</span><span class="p">(</span><span class="n">zmin</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">zmax</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">lammin</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">lammax</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="c1">#please check the file path properly</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/redmapper.dat&#39;</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/redmapper.dat&#39;</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="c1">#sample selection cut</span>
     <span class="n">idx</span>  <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;lambda&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="n">lammin</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;lambda&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">lammax</span><span class="p">)</span>
     <span class="n">idx</span>  <span class="o">=</span> <span class="n">idx</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;zred&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="n">zmin</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;zred&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">zmax</span><span class="p">)</span>
@@ -187,7 +189,7 @@
 \[\sin \phi = \frac{-\sin \delta_l \cos \delta_s + \cos \delta_l \sin \delta_s  \cos(\alpha_s - \alpha_l)}{|\sin\theta|}\]</div>
 <div class="math notranslate nohighlight">
 \[\cos \phi =  \frac{\cos\delta_l \sin(\alpha_s - \alpha_l)}{|\sin\theta|}\]</div>
-<p>For more info related to above equations refer to Lecture Notes for <a class="reference external" href="https://surhudm.github.io/Weaklensing_IAGRG/Weak_gravitational_lensing.html#Tangential-shear-computation">Tangential-shear-computation</a></p>
+<p>For more info related to above equations refer to the Notes for <a class="reference external" href="https://surhudm.github.io/Weaklensing_IAGRG/Weak_gravitational_lensing.html#Tangential-shear-computation">Tangential-shear-computation</a>.</p>
 <p>Coding up these equations requires trigonometric functions from numpy package. Please check them out - <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sin.html">sin</a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.cos.html#numpy.cos">cos</a></p>
 <p><strong>Please note that these functions by default uses angles in radians and here we are working with catalog data with (ra,dec) in degrees. So, we need to do the needful conversion first</strong></p>
 <div class="nbinput nblast docutils container">
@@ -293,7 +295,7 @@
 <li><p><strong>rmax</strong> : Maximum projected radius - will be used for setting projected radial range, default = 2.0</p></li>
 <li><p><strong>nbins</strong> : number of projected radial bins - use to setup the logarithmic binning, default = 10</p></li>
 <li><p><strong>zdiff</strong> : a small offset added to lense redshift to select cleaner background sources <span class="math notranslate nohighlight">\(z_s &gt; (z_l + {\rm zdiff})\)</span>, default = 0.4</p></li>
-<li><p><strong>outputfile</strong>: dat file name for the output, default = ‘iagrg_dsigma.dat’</p></li>
+<li><p><strong>outputfile</strong>: dat file name for the output, default = ‘astrotwin_dsigma.dat’</p></li>
 </ol>
 </li>
 <li><p><strong>Initialize the astropy cosmo then getting projected radial binning array ready</strong></p></li>
@@ -325,7 +327,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_pipe</span><span class="p">(</span><span class="n">Omegam</span><span class="o">=</span><span class="mf">0.315</span><span class="p">,</span> <span class="n">rmin</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">rmax</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">zdiff</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">outputfile</span> <span class="o">=</span> <span class="s1">&#39;iagrg_dsigma.dat&#39;</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_pipe</span><span class="p">(</span><span class="n">Omegam</span><span class="o">=</span><span class="mf">0.315</span><span class="p">,</span> <span class="n">rmin</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">rmax</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">zdiff</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">outputfile</span> <span class="o">=</span> <span class="s1">&#39;astrotwin_dsigma.dat&#39;</span><span class="p">):</span>
     <span class="c1">#set the cosmology with omegaM parameter</span>
     <span class="n">cc</span> <span class="o">=</span> <span class="n">FlatLambdaCDM</span><span class="p">(</span><span class="n">H0</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">Om0</span><span class="o">=</span><span class="n">Omegam</span><span class="p">)</span> <span class="c1"># fixing H0=100 to set units in Mpc h-1</span>
 
@@ -355,7 +357,7 @@
     <span class="n">dismax</span>  <span class="o">=</span> <span class="p">(</span><span class="n">rmax</span><span class="o">*</span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">dcommin</span><span class="p">))</span>
 
     <span class="c1"># lets first catch the file list for sources</span>
-    <span class="n">sflist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/*.dat&#39;</span><span class="p">))</span>
+    <span class="n">sflist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/*.dat&#39;</span><span class="p">))</span>
 
     <span class="c1"># Ready to pounce on the source data</span>
     <span class="k">for</span> <span class="n">ifil</span> <span class="ow">in</span> <span class="n">sflist</span><span class="p">:</span>
@@ -477,7 +479,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;iagrg_dsigma.dat&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;astrotwin_dsigma.dat&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">dat</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">dat</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">dat</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -510,7 +512,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="astrotwin_day_2_hands_on.html" class="btn btn-neutral float-left" title="Day 2 Solutions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="get_model.html" class="btn btn-neutral float-right" title="Day 4 - Model the weak lensing signal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="astrotwin_day_3_hands_on.html" class="btn btn-neutral float-right" title="Day 3 Solutions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

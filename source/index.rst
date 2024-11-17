@@ -19,4 +19,6 @@ AstroTwinColo 2024 tutorial documentation
    pair_counting
    astrotwin_day_2_hands_on
    get_signals
+   astrotwin_day_3_hands_on
    get_model
+   astrotwin_day_4_hands_on

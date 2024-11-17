@@ -22,7 +22,9 @@
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Day 4 - Model the weak lensing signal" href="get_model.html" />
+    <link rel="prev" title="Day 3 - Get the Weak Lensing Signals" href="get_signals.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,13 +47,15 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="instructions.html">Day 1 - Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_1_hands_on.html">Day 1 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pair_counting.html">Day 2 - Finding neighbours</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_2_hands_on.html">Day 2 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get_signals.html">Day 3 - Get the Weak Lensing Signals</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Day 3 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get_model.html">Day 4 - Model the weak lensing signal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="astrotwin_day_4_hands_on.html">Day 4 Solutions</a></li>
 </ul>
 
         </div>
@@ -70,7 +74,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Day 3 Solutions</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/iagrg_day_3_hands_on.ipynb.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/astrotwin_day_3_hands_on.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -132,7 +136,7 @@
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># selection cut on the lens sample</span>
 <span class="k">def</span> <span class="nf">lens_select</span><span class="p">(</span><span class="n">zmin</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">zmax</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">lammin</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">lammax</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
     <span class="c1">#please check the file path properly</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/redmapper.dat&#39;</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/redmapper.dat&#39;</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="c1">#sample selection cut</span>
     <span class="n">idx</span>  <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;lambda&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="n">lammin</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;lambda&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">lammax</span><span class="p">)</span>
     <span class="n">idx</span>  <span class="o">=</span> <span class="n">idx</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;zred&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="n">zmin</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;zred&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">zmax</span><span class="p">)</span>
@@ -253,7 +257,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="k">def</span> <span class="nf">run_pipe</span><span class="p">(</span><span class="n">Omegam</span><span class="o">=</span><span class="mf">0.315</span><span class="p">,</span> <span class="n">rmin</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">rmax</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">zdiff</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">outputfile</span> <span class="o">=</span> <span class="s1">&#39;iagrg_dsigma.dat&#39;</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="k">def</span> <span class="nf">run_pipe</span><span class="p">(</span><span class="n">Omegam</span><span class="o">=</span><span class="mf">0.315</span><span class="p">,</span> <span class="n">rmin</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">rmax</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">zdiff</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">outputfile</span> <span class="o">=</span> <span class="s1">&#39;astrotwin_dsigma.dat&#39;</span><span class="p">):</span>
     <span class="c1">#set the cosmology with omegaM parameter</span>
     <span class="n">cc</span> <span class="o">=</span> <span class="n">FlatLambdaCDM</span><span class="p">(</span><span class="n">H0</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">Om0</span><span class="o">=</span><span class="n">Omegam</span><span class="p">)</span> <span class="c1"># fixing H0=100 to set units in Mpc h-1</span>
 
@@ -287,7 +291,7 @@
     <span class="n">dismax</span>  <span class="o">=</span> <span class="p">(</span><span class="n">rmax</span><span class="o">*</span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">dcommin</span><span class="p">))</span>
 
     <span class="c1"># lets first catch the file list for sources</span>
-    <span class="n">sflist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/*.dat&#39;</span><span class="p">))</span>
+    <span class="n">sflist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/*.dat&#39;</span><span class="p">))</span>
 
     <span class="c1"># Ready to pounce on the source data</span>
     <span class="k">for</span> <span class="n">ifil</span> <span class="ow">in</span> <span class="n">sflist</span><span class="p">:</span>
@@ -563,7 +567,7 @@ lenses tree is ready
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;iagrg_dsigma.dat&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;astrotwin_dsigma.dat&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">dat</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">dat</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">dat</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -579,7 +583,7 @@ lenses tree is ready
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/iagrg_day_3_hands_on_13_0.png" src="_images/iagrg_day_3_hands_on_13_0.png" />
+<img alt="_images/astrotwin_day_3_hands_on_13_0.png" src="_images/astrotwin_day_3_hands_on_13_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -595,7 +599,10 @@ lenses tree is ready
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="get_signals.html" class="btn btn-neutral float-left" title="Day 3 - Get the Weak Lensing Signals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="get_model.html" class="btn btn-neutral float-right" title="Day 4 - Model the weak lensing signal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
