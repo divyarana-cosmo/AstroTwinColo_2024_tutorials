@@ -16,13 +16,11 @@ release = '2024'
 
 extensions = ['nbsphinx', 'sphinx_rtd_theme']
 
-exclude_patterns = [
-    '**/*.ipynb',  # Exclude all notebooks globally
-]
+exclude_patterns = ['**.ipynb_checkpoints']
 
 
 templates_path = ['_templates']
-exclude_patterns = []
+#exclude_patterns = []
 
 
 
