@@ -14,7 +14,9 @@ AstroTwinColo 2024 tutorial documentation
    :maxdepth: 2
    :caption: Contents:
    
-   instructions
+   instructions.ipynb
+   astrotwin_day_1_hands_on
    pair_counting
+   astrotwin_day_2_hands_on
    get_signals
    get_model

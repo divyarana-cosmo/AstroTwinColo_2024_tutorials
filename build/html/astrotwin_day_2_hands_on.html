@@ -22,7 +22,9 @@
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Day 3 - Get the Weak Lensing Signals" href="get_signals.html" />
+    <link rel="prev" title="Day 2 - Finding neighbours" href="pair_counting.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,9 +47,28 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="instructions.html">Day 1 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="astrotwin_day_1_hands_on.html">Day 1 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pair_counting.html">Day 2 - Finding neighbours</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Day 2 Solutions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Reading-the-lens/source-catalog">Reading the lens/source catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Visualising-the-coordinate-space-of-input-data">Visualising the coordinate space of input data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#On-sky-distance-between-two-points-on-the-surface-of-a-unit-sphere"><code class="docutils literal notranslate"><span class="pre">On-sky</span> <span class="pre">distance</span></code> between two points on the surface of a unit sphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Brute-force-search-for-neighbour-objects-within-a-specified-distance">Brute force search for neighbour objects within a specified distance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Testing-the-above-brute-force-search-functions">Testing the above <code class="docutils literal notranslate"><span class="pre">brute</span> <span class="pre">force</span> <span class="pre">search</span></code> functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#A-visual-sanity-check-for-execution-of-find_neighbour_points-function">A visual sanity check for execution of <code class="docutils literal notranslate"><span class="pre">find_neighbour_points</span></code> function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Using-k-d-tree-algorithm-to-query-the-neighbour-points-within-a-given-distance">Using k-d tree algorithm to query the neighbour points within a given distance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#A-sanity-check">A sanity check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Compare-the-output-of-our-brute-force-algorithm-with-cKDTree-algorithm-on-dew-Demo-objects">Compare the output of our brute force algorithm with cKDTree algorithm on dew Demo objects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Compare-the-computer-time-required-by-our-brute-force-algorithm-vs-the-k-d-tree-algorithm">Compare the computer time required by our brute force algorithm vs the k-d tree algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Congratulations!-Now-you-have-learnt-to--">Congratulations! Now you have learnt to -</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="get_signals.html">Day 3 - Get the Weak Lensing Signals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="get_model.html">Day 4 - Model the weak lensing signal</a></li>
 </ul>
@@ -68,7 +89,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Day 2 Solutions</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/pair_counting_solutions.ipynb.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/astrotwin_day_2_hands_on.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -95,9 +116,9 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/demo_objects.csv
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv
 
-<span class="c1"># !wc -l /home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/demo_objects.csv</span>
+<span class="c1"># !wc -l /home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv</span>
 </pre></div>
 </div>
 </div>
@@ -120,7 +141,7 @@ ra,dec,z,col_3,col_4,col_5
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#reading lens file</span>
 
 <span class="c1">#tries to read everthing in the file</span>
-<span class="n">path</span><span class="o">=</span><span class="s2">&quot;/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/demo_objects.csv&quot;</span>
+<span class="n">path</span><span class="o">=</span><span class="s2">&quot;/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv&quot;</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
 </pre></div>
@@ -252,7 +273,7 @@ ra,dec,z,col_3,col_4,col_5
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/pair_counting_solutions_10_0.png" src="_images/pair_counting_solutions_10_0.png" />
+<img alt="_images/astrotwin_day_2_hands_on_10_0.png" src="_images/astrotwin_day_2_hands_on_10_0.png" />
 </div>
 </div>
 </section>
@@ -696,7 +717,7 @@ Accessing the neighbour coordinates of the 15th object:
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/pair_counting_solutions_29_0.png" src="_images/pair_counting_solutions_29_0.png" />
+<img alt="_images/astrotwin_day_2_hands_on_29_0.png" src="_images/astrotwin_day_2_hands_on_29_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1004,7 +1025,10 @@ Wall time: 7.94 s
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pair_counting.html" class="btn btn-neutral float-left" title="Day 2 - Finding neighbours" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="get_signals.html" class="btn btn-neutral float-right" title="Day 3 - Get the Weak Lensing Signals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
