@@ -23,7 +23,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Day 3 - Get the Weak Lensing Signals" href="astrotwin_day_3_hands_on.html" />
+    <link rel="next" title="Day 2 Solutions" href="solutions_astrotwin_day_2_hands_on.html" />
     <link rel="prev" title="Day 1 Solutions" href="solutions_astrotwin_day_1_hands_on.html" /> 
 </head>
 
@@ -71,6 +71,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#Congratulations!-Now-you-have-learnt-to--">Congratulations! Now you have learnt to -</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="solutions_astrotwin_day_2_hands_on.html">Day 2 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_3_hands_on.html">Day 3 - Get the Weak Lensing Signals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_4_hands_on.html">Day 4 - Model the weak lensing signal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_5_hands_on.html">Day 5 - Environmental dependence of matter profiles</a></li>
@@ -103,7 +104,7 @@
   <section id="Day-2---Finding-neighbours">
 <h1>Day 2 - Finding neighbours<a class="headerlink" href="#Day-2---Finding-neighbours" title="Link to this heading"></a></h1>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -116,11 +117,10 @@
 <section id="Reading-the-lens/source-catalog">
 <h2>Reading the lens/source catalog<a class="headerlink" href="#Reading-the-lens/source-catalog" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv
-
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!head -n 5 /home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv</span>
 <span class="c1"># !wc -l /home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv</span>
 </pre></div>
 </div>
@@ -130,22 +130,22 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-ra,dec,z,col_3,col_4,col_5
-30.611734783139795,-6.3569091978972425,23.901826,23.043298,22.649281,0.5
-30.61078116389429,-6.350381359287763,22.385773,21.548382,21.272576,0.38
-30.596477830319948,-6.3461523588063935,23.948118,23.121471,22.773187,0.37
-30.592680083175416,-6.3445214768250775,23.42731400000001,22.022285999999998,21.334948,0.45
+ra,dec
+30.611734783139795,-6.3569091978972425
+30.61078116389429,-6.350381359287763
+30.596477830319948,-6.3461523588063935
+30.592680083175416,-6.3445214768250775
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#reading lens file</span>
 
 <span class="c1">#tries to read everthing in the file</span>
-<span class="n">path</span><span class="o">=</span><span class="s2">&quot;/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv&quot;</span>
-
+<span class="c1">#path=&quot;/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv&quot;</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Users/divyarana/github/iagrg_2022_weaklens/DataStore/demo_objects.csv&#39;</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -153,12 +153,9 @@ ra,dec,z,col_3,col_4,col_5
 </section>
 <section id="A-brief-look-of-what-dataFrame-has-for-us-:">
 <h2>A brief look of what dataFrame has for us :<a class="headerlink" href="#A-brief-look-of-what-dataFrame-has-for-us-:" title="Link to this heading"></a></h2>
-<p>Data from - <code class="docutils literal notranslate"><span class="pre">HSC</span> <span class="pre">survey</span></code></p>
-<p>ra,dec - coordinates in units of degrees.</p>
-<p>z - photometric redshifts of the objects.</p>
-<p>col_1,col_2,col_3 - extra columns which have to be ignored</p>
+<p>Data from - <code class="docutils literal notranslate"><span class="pre">HSC</span> <span class="pre">survey</span></code> ra,dec - coordinates in units of degrees.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -166,7 +163,7 @@ ra,dec,z,col_3,col_4,col_5
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -190,10 +187,6 @@ ra,dec,z,col_3,col_4,col_5
       <th></th>
       <th>ra</th>
       <th>dec</th>
-      <th>z</th>
-      <th>col_3</th>
-      <th>col_4</th>
-      <th>col_5</th>
     </tr>
   </thead>
   <tbody>
@@ -201,46 +194,26 @@ ra,dec,z,col_3,col_4,col_5
       <th>0</th>
       <td>30.611735</td>
       <td>-6.356909</td>
-      <td>23.901826</td>
-      <td>23.043298</td>
-      <td>22.649281</td>
-      <td>0.50</td>
     </tr>
     <tr>
       <th>1</th>
       <td>30.610781</td>
       <td>-6.350381</td>
-      <td>22.385773</td>
-      <td>21.548382</td>
-      <td>21.272576</td>
-      <td>0.38</td>
     </tr>
     <tr>
       <th>2</th>
       <td>30.596478</td>
       <td>-6.346152</td>
-      <td>23.948118</td>
-      <td>23.121471</td>
-      <td>22.773187</td>
-      <td>0.37</td>
     </tr>
     <tr>
       <th>3</th>
       <td>30.592680</td>
       <td>-6.344521</td>
-      <td>23.427314</td>
-      <td>22.022286</td>
-      <td>21.334948</td>
-      <td>0.45</td>
     </tr>
     <tr>
       <th>4</th>
       <td>30.601111</td>
       <td>-6.338650</td>
-      <td>21.660045</td>
-      <td>20.812223</td>
-      <td>20.383688</td>
-      <td>0.32</td>
     </tr>
   </tbody>
 </table>
@@ -248,15 +221,15 @@ ra,dec,z,col_3,col_4,col_5
 </div>
 <p>Select the required columns only</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -264,7 +237,7 @@ ra,dec,z,col_3,col_4,col_5
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -288,7 +261,6 @@ ra,dec,z,col_3,col_4,col_5
       <th></th>
       <th>ra</th>
       <th>dec</th>
-      <th>z</th>
     </tr>
   </thead>
   <tbody>
@@ -296,31 +268,26 @@ ra,dec,z,col_3,col_4,col_5
       <th>0</th>
       <td>30.611735</td>
       <td>-6.356909</td>
-      <td>23.901826</td>
     </tr>
     <tr>
       <th>1</th>
       <td>30.610781</td>
       <td>-6.350381</td>
-      <td>22.385773</td>
     </tr>
     <tr>
       <th>2</th>
       <td>30.596478</td>
       <td>-6.346152</td>
-      <td>23.948118</td>
     </tr>
     <tr>
       <th>3</th>
       <td>30.592680</td>
       <td>-6.344521</td>
-      <td>23.427314</td>
     </tr>
     <tr>
       <th>4</th>
       <td>30.601111</td>
       <td>-6.338650</td>
-      <td>21.660045</td>
     </tr>
   </tbody>
 </table>
@@ -332,14 +299,14 @@ ra,dec,z,col_3,col_4,col_5
 <div class="admonition note">
 <p class="admonition-title fa fa-exclamation-circle">Exercise:</p>
 <ul>
-<li><p>write a python code to plot dec (on Y-axis) vs ra (on X-axis) of the objects passed in the dataFrame.</p>
+<li><p>Write a python code to plot dec (on Y-axis) vs ra (on X-axis) of the objects passed in the dataFrame.</p>
 <p>This plot will look very dense, so in order to visually see the points distributed on the (ra,dec) plane, downsample the number of points by 100 and again plot.</p>
 </li>
-<li><p>In order to downsample the points, use <code class="docutils literal notranslate"><span class="pre">numpy.random.choise()</span></code> function.</p></li>
+<li><p>In order to downsample the points, use <code class="docutils literal notranslate"><span class="pre">numpy.random.choice()</span></code> function.</p></li>
 </ul>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using numpy.random.choise() to randomly pick up points</span>
@@ -367,7 +334,7 @@ Number of points before down sampling =  220622
 Number of points after down sampling by 100 =  2206
 
 randomly picked indices:
- [ 77470 149688  79224 ...  44467  39179  90845]
+ [140764  41154 180830 ... 206994 104461 217479]
 </pre></div></div>
 </div>
 <center><p>Your plot should look something like</p>
@@ -375,7 +342,7 @@ randomly picked indices:
 </section>
 <section id="On-sky-distance-between-two-points-on-the-surface-of-a-unit-sphere.">
 <h2><code class="docutils literal notranslate"><span class="pre">On-sky</span> <span class="pre">distance</span></code> between two points on the surface of a unit sphere.<a class="headerlink" href="#On-sky-distance-between-two-points-on-the-surface-of-a-unit-sphere." title="Link to this heading"></a></h2>
-<p><img alt="0643de78ee4944c488034c27244ec47f" class="no-scaled-link" src="_images/Equitorial_coord_sys.jpg" style="width: 400px; height: 300px;" /></p>
+<p><img alt="f2aa7fa299a04d1dba720c2ff4a62c7a" class="no-scaled-link" src="_images/Equitorial_coord_sys.jpg" style="width: 400px; height: 300px;" /></p>
 <p>Given the spherical coordinate system, we can express the points in as</p>
 <p><span class="math notranslate nohighlight">\(\vec{r_i} = r_i \cdot (\sin(90 -\delta_i) \cos\alpha_i \ \hat{x}+ \sin(90 -\delta_i) \sin\alpha_i \ \hat{y} + \cos(90 -\delta_i) \ \hat{z})\)</span>, <span class="math notranslate nohighlight">\(\hspace{0.2cm}\)</span>for <span class="math notranslate nohighlight">\(\mathrm{i \in (1,2)}\)</span>. Here <span class="math notranslate nohighlight">\(\alpha_i\)</span> and <span class="math notranslate nohighlight">\(\delta_i\)</span> are the right ascension and declination for <span class="math notranslate nohighlight">\(i^{\rm th}\)</span> point.</p>
 <p>We will first compute the cosine of the angle <span class="math notranslate nohighlight">\(\theta\)</span> between the points using :</p>
@@ -411,7 +378,7 @@ randomly picked indices:
 <h2>Running and testing the distance computation code:<a class="headerlink" href="#Running-and-testing-the-distance-computation-code:" title="Link to this heading"></a></h2>
 <p>Creating a list/array tuple of values from ra,dec of each object</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coords</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span> <span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">df</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
@@ -426,7 +393,7 @@ randomly picked indices:
 </ul>
 </div>
 <p>I get the following:</p>
-<p><img alt="2f02087e972f4e3ba374ef9441344b72" class="no-scaled-link" src="_images/onsky_distance_test.png" style="width: 300px; height: 70px;" /></p>
+<p><img alt="7bc2dc807f564b53b48f1a90241dd0fb" class="no-scaled-link" src="_images/onsky_distance_test.png" style="width: 300px; height: 70px;" /></p>
 </section>
 <section id="Brute-force-search-for-neighbour-objects-within-a-specified-distance">
 <h2>Brute force search for neighbour objects within a specified distance<a class="headerlink" href="#Brute-force-search-for-neighbour-objects-within-a-specified-distance" title="Link to this heading"></a></h2>
@@ -446,7 +413,7 @@ randomly picked indices:
 <li></li>
 </ol>
 <ul class="simple">
-<li><p>Write a function <code class="docutils literal notranslate"><span class="pre">query_neighbour_points</span></code> that can use (ra,dec) coordinates of one object or an list/array of objets, and within some given <code class="docutils literal notranslate"><span class="pre">rmax</span></code> distance, finds its neighbour points in any other catalog.</p></li>
+<li><p>Write a function <code class="docutils literal notranslate"><span class="pre">query_neighbour_points</span></code> that can use (ra,dec) coordinates of one object or an list/array of objects, and within some given <code class="docutils literal notranslate"><span class="pre">rmax</span></code> distance, finds its neighbour points in any other catalog.</p></li>
 <li><p>Using this code you should be able to access the coordinates of all the neighbours of each object that you are querying for. And hence you should be able to tell how far each neighbour is from the queried object.</p></li>
 </ul>
 </div>
@@ -638,8 +605,8 @@ Accessing the neighbour coordinates of the 15th object:
 </div>
 <p>I’m plotting the neighbours of <span class="math notranslate nohighlight">\(15^{th}\)</span> point from the catalog. And also printing their <code class="docutils literal notranslate"><span class="pre">indices</span></code> and <code class="docutils literal notranslate"><span class="pre">distances</span></code> to compare the stored distances by eye!</p>
 <p>Point marked as <span class="math notranslate nohighlight">\(\star\)</span> is the <span class="math notranslate nohighlight">\(15^{th}\)</span> point. Other points are its neighbours.</p>
-<p><img alt="b5f9089466db44f0bf3e965a125f77d9" class="no-scaled-link" src="_images/neighbours_of_15th_obj.png" style="width: 500px; height: 400px;" /></p>
-<p><img alt="ce4be28eb4494da5998d6ab8e9ed1e90" class="no-scaled-link" src="_images/neighbours_printed.png" style="width: 300px; height: 80px;" /></p>
+<p><img alt="d5dc7241c17341caa02b546182a33b45" class="no-scaled-link" src="_images/neighbours_of_15th_obj.png" style="width: 500px; height: 400px;" /></p>
+<p><img alt="cfb6279d2356446185b51a2f2c29c799" class="no-scaled-link" src="_images/neighbours_printed.png" style="width: 300px; height: 80px;" /></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
@@ -791,7 +758,7 @@ Accessing the neighbour coordinates of the 15th object:
 </pre></div>
 </div>
 </div>
-<p><img alt="4cafe8149bc7492cbcc7d3f7ddc6f99d" class="no-scaled-link" src="_images/coordinate_conversion_test.png" style="width: 400px; height: 200px;" /></p>
+<p><img alt="cb67187eb9a1452fa6807f2944f6659b" class="no-scaled-link" src="_images/coordinate_conversion_test.png" style="width: 400px; height: 200px;" /></p>
 </section>
 <section id="Compare-the-output-of-our-brute-force-algorithm-with-cKDTree-algorithm-on-few-Demo-objects">
 <h3>Compare the output of our brute force algorithm with cKDTree algorithm on few Demo objects<a class="headerlink" href="#Compare-the-output-of-our-brute-force-algorithm-with-cKDTree-algorithm-on-few-Demo-objects" title="Link to this heading"></a></h3>
@@ -901,7 +868,7 @@ Initializing with sphere of radius, r=1.
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="solutions_astrotwin_day_1_hands_on.html" class="btn btn-neutral float-left" title="Day 1 Solutions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="astrotwin_day_3_hands_on.html" class="btn btn-neutral float-right" title="Day 3 - Get the Weak Lensing Signals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="solutions_astrotwin_day_2_hands_on.html" class="btn btn-neutral float-right" title="Day 2 Solutions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

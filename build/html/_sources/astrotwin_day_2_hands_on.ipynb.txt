@@ -9,7 +9,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": 3,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -28,7 +28,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": 1,
    "metadata": {
     "tags": [
      "hide_input"
@@ -39,31 +39,30 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "ra,dec,z,col_3,col_4,col_5\r\n",
-      "30.611734783139795,-6.3569091978972425,23.901826,23.043298,22.649281,0.5\r\n",
-      "30.61078116389429,-6.350381359287763,22.385773,21.548382,21.272576,0.38\r\n",
-      "30.596477830319948,-6.3461523588063935,23.948118,23.121471,22.773187,0.37\r\n",
-      "30.592680083175416,-6.3445214768250775,23.42731400000001,22.022285999999998,21.334948,0.45\r\n"
+      "ra,dec\n",
+      "30.611734783139795,-6.3569091978972425\n",
+      "30.61078116389429,-6.350381359287763\n",
+      "30.596477830319948,-6.3461523588063935\n",
+      "30.592680083175416,-6.3445214768250775\n"
      ]
     }
    ],
    "source": [
-    "!head -n 5 /home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv\n",
-    "\n",
+    "#!head -n 5 /home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv\n",
     "# !wc -l /home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 6,
+   "execution_count": 4,
    "metadata": {},
    "outputs": [],
    "source": [
     "#reading lens file\n",
     "\n",
     "#tries to read everthing in the file\n",
-    "path=\"/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv\"\n",
-    "\n",
+    "#path=\"/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv\"\n",
+    "path = '/Users/divyarana/github/iagrg_2022_weaklens/DataStore/demo_objects.csv'\n",
     "df = pd.read_csv(path, sep=',') "
    ]
   },
@@ -74,17 +73,12 @@
     "### A brief look of what dataFrame has for us :\n",
     "\n",
     "Data from - `HSC survey`<br>\n",
-    "\n",
-    "ra,dec    - coordinates in units of degrees.<br>\n",
-    "\n",
-    "z         - photometric redshifts of the objects.\n",
-    "\n",
-    "col_1,col_2,col_3 - extra columns which have to be ignored\n"
+    "ra,dec    - coordinates in units of degrees.<br>\n"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": 5,
    "metadata": {},
    "outputs": [
     {
@@ -110,10 +104,6 @@
        "      <th></th>\n",
        "      <th>ra</th>\n",
        "      <th>dec</th>\n",
-       "      <th>z</th>\n",
-       "      <th>col_3</th>\n",
-       "      <th>col_4</th>\n",
-       "      <th>col_5</th>\n",
        "    </tr>\n",
        "  </thead>\n",
        "  <tbody>\n",
@@ -121,61 +111,41 @@
        "      <th>0</th>\n",
        "      <td>30.611735</td>\n",
        "      <td>-6.356909</td>\n",
-       "      <td>23.901826</td>\n",
-       "      <td>23.043298</td>\n",
-       "      <td>22.649281</td>\n",
-       "      <td>0.50</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>1</th>\n",
        "      <td>30.610781</td>\n",
        "      <td>-6.350381</td>\n",
-       "      <td>22.385773</td>\n",
-       "      <td>21.548382</td>\n",
-       "      <td>21.272576</td>\n",
-       "      <td>0.38</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>2</th>\n",
        "      <td>30.596478</td>\n",
        "      <td>-6.346152</td>\n",
-       "      <td>23.948118</td>\n",
-       "      <td>23.121471</td>\n",
-       "      <td>22.773187</td>\n",
-       "      <td>0.37</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>3</th>\n",
        "      <td>30.592680</td>\n",
        "      <td>-6.344521</td>\n",
-       "      <td>23.427314</td>\n",
-       "      <td>22.022286</td>\n",
-       "      <td>21.334948</td>\n",
-       "      <td>0.45</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>4</th>\n",
        "      <td>30.601111</td>\n",
        "      <td>-6.338650</td>\n",
-       "      <td>21.660045</td>\n",
-       "      <td>20.812223</td>\n",
-       "      <td>20.383688</td>\n",
-       "      <td>0.32</td>\n",
        "    </tr>\n",
        "  </tbody>\n",
        "</table>\n",
        "</div>"
       ],
       "text/plain": [
-       "          ra       dec          z      col_3      col_4  col_5\n",
-       "0  30.611735 -6.356909  23.901826  23.043298  22.649281   0.50\n",
-       "1  30.610781 -6.350381  22.385773  21.548382  21.272576   0.38\n",
-       "2  30.596478 -6.346152  23.948118  23.121471  22.773187   0.37\n",
-       "3  30.592680 -6.344521  23.427314  22.022286  21.334948   0.45\n",
-       "4  30.601111 -6.338650  21.660045  20.812223  20.383688   0.32"
+       "          ra       dec\n",
+       "0  30.611735 -6.356909\n",
+       "1  30.610781 -6.350381\n",
+       "2  30.596478 -6.346152\n",
+       "3  30.592680 -6.344521\n",
+       "4  30.601111 -6.338650"
       ]
      },
-     "execution_count": 7,
+     "execution_count": 5,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -193,16 +163,16 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 8,
+   "execution_count": 6,
    "metadata": {},
    "outputs": [],
    "source": [
-    "df = pd.read_csv(path, sep=',', usecols=[0,1,2])"
+    "df = pd.read_csv(path, sep=',', usecols=[0,1])"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": 7,
    "metadata": {
     "scrolled": true
    },
@@ -230,7 +200,6 @@
        "      <th></th>\n",
        "      <th>ra</th>\n",
        "      <th>dec</th>\n",
-       "      <th>z</th>\n",
        "    </tr>\n",
        "  </thead>\n",
        "  <tbody>\n",
@@ -238,46 +207,41 @@
        "      <th>0</th>\n",
        "      <td>30.611735</td>\n",
        "      <td>-6.356909</td>\n",
-       "      <td>23.901826</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>1</th>\n",
        "      <td>30.610781</td>\n",
        "      <td>-6.350381</td>\n",
-       "      <td>22.385773</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>2</th>\n",
        "      <td>30.596478</td>\n",
        "      <td>-6.346152</td>\n",
-       "      <td>23.948118</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>3</th>\n",
        "      <td>30.592680</td>\n",
        "      <td>-6.344521</td>\n",
-       "      <td>23.427314</td>\n",
        "    </tr>\n",
        "    <tr>\n",
        "      <th>4</th>\n",
        "      <td>30.601111</td>\n",
        "      <td>-6.338650</td>\n",
-       "      <td>21.660045</td>\n",
        "    </tr>\n",
        "  </tbody>\n",
        "</table>\n",
        "</div>"
       ],
       "text/plain": [
-       "          ra       dec          z\n",
-       "0  30.611735 -6.356909  23.901826\n",
-       "1  30.610781 -6.350381  22.385773\n",
-       "2  30.596478 -6.346152  23.948118\n",
-       "3  30.592680 -6.344521  23.427314\n",
-       "4  30.601111 -6.338650  21.660045"
+       "          ra       dec\n",
+       "0  30.611735 -6.356909\n",
+       "1  30.610781 -6.350381\n",
+       "2  30.596478 -6.346152\n",
+       "3  30.592680 -6.344521\n",
+       "4  30.601111 -6.338650"
       ]
      },
-     "execution_count": 9,
+     "execution_count": 7,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -301,17 +265,17 @@
     "\n",
     "Exercise: \n",
     "    \n",
-    "- write a python code to plot dec (on Y-axis) vs ra (on X-axis) of the objects passed in the dataFrame.\n",
+    "- Write a python code to plot dec (on Y-axis) vs ra (on X-axis) of the objects passed in the dataFrame.\n",
     "\n",
     "    This plot will look very dense, so in order to visually see the points distributed on the (ra,dec) plane, downsample the number of points by 100 and again plot.\n",
-    "- In order to downsample the points, use `numpy.random.choise()` function.\n",
+    "- In order to downsample the points, use `numpy.random.choice()` function.\n",
     "\n",
     "</div>"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 10,
+   "execution_count": 8,
    "metadata": {},
    "outputs": [
     {
@@ -322,7 +286,7 @@
       "Number of points after down sampling by 100 =  2206\n",
       "\n",
       "randomly picked indices:\n",
-      " [ 77470 149688  79224 ...  44467  39179  90845]\n"
+      " [140764  41154 180830 ... 206994 104461 217479]\n"
      ]
     }
    ],
@@ -442,7 +406,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 12,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -491,7 +455,7 @@
     "\n",
     "2)\n",
     "    \n",
-    "- Write a function `query_neighbour_points` that can use (ra,dec) coordinates of one object or an list/array of objets, and within some given `rmax` distance, finds its neighbour points in any other catalog.\n",
+    "- Write a function `query_neighbour_points` that can use (ra,dec) coordinates of one object or an list/array of objects, and within some given `rmax` distance, finds its neighbour points in any other catalog.\n",
     "\n",
     "- Using this code you should be able to access the coordinates of all the neighbours of each object that you are querying for. And hence you should be able to tell how far each neighbour is from the queried object.\n",
     "    \n",

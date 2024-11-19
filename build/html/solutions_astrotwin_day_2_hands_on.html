@@ -22,7 +22,9 @@
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Day 3 - Get the Weak Lensing Signals" href="astrotwin_day_3_hands_on.html" />
+    <link rel="prev" title="Day 2 - Finding neighbours" href="astrotwin_day_2_hands_on.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,10 +47,28 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_1_hands_on.html">Day 1 - Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solutions_astrotwin_day_1_hands_on.html">Day 1 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_2_hands_on.html">Day 2 - Finding neighbours</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Day 2 Solutions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Reading-the-lens/source-catalog">Reading the lens/source catalog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Visualising-the-coordinate-space-of-input-data">Visualising the coordinate space of input data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#On-sky-distance-between-two-points-on-the-surface-of-a-unit-sphere"><code class="docutils literal notranslate"><span class="pre">On-sky</span> <span class="pre">distance</span></code> between two points on the surface of a unit sphere</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Brute-force-search-for-neighbour-objects-within-a-specified-distance">Brute force search for neighbour objects within a specified distance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Testing-the-above-brute-force-search-functions">Testing the above <code class="docutils literal notranslate"><span class="pre">brute</span> <span class="pre">force</span> <span class="pre">search</span></code> functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#A-visual-sanity-check-for-execution-of-find_neighbour_points-function">A visual sanity check for execution of <code class="docutils literal notranslate"><span class="pre">find_neighbour_points</span></code> function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Using-k-d-tree-algorithm-to-query-the-neighbour-points-within-a-given-distance">Using k-d tree algorithm to query the neighbour points within a given distance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#A-sanity-check">A sanity check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Compare-the-output-of-our-brute-force-algorithm-with-cKDTree-algorithm-on-dew-Demo-objects">Compare the output of our brute force algorithm with cKDTree algorithm on dew Demo objects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Compare-the-computer-time-required-by-our-brute-force-algorithm-vs-the-k-d-tree-algorithm">Compare the computer time required by our brute force algorithm vs the k-d tree algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Congratulations!-Now-you-have-learnt-to--">Congratulations! Now you have learnt to -</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_3_hands_on.html">Day 3 - Get the Weak Lensing Signals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_4_hands_on.html">Day 4 - Model the weak lensing signal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_5_hands_on.html">Day 5 - Environmental dependence of matter profiles</a></li>
@@ -81,7 +101,7 @@
   <section id="Day-2-Solutions">
 <h1>Day 2 Solutions<a class="headerlink" href="#Day-2-Solutions" title="Link to this heading"></a></h1>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -94,7 +114,7 @@
 <section id="Reading-the-lens/source-catalog">
 <h2>Reading the lens/source catalog<a class="headerlink" href="#Reading-the-lens/source-catalog" title="Link to this heading"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/demo_objects.csv
@@ -108,11 +128,11 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-ra,dec,z,col_3,col_4,col_5
-30.611734783139795,-6.3569091978972425,23.901826,23.043298,22.649281,0.5
-30.61078116389429,-6.350381359287763,22.385773,21.548382,21.272576,0.38
-30.596477830319948,-6.3461523588063935,23.948118,23.121471,22.773187,0.37
-30.592680083175416,-6.3445214768250775,23.42731400000001,22.022285999999998,21.334948,0.45
+ra,dec
+30.611734783139795,-6.3569091978972425
+30.61078116389429,-6.350381359287763
+30.596477830319948,-6.3461523588063935
+30.592680083175416,-6.3445214768250775
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -133,7 +153,7 @@ ra,dec,z,col_3,col_4,col_5
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -170,7 +190,6 @@ ra,dec,z,col_3,col_4,col_5
       <th></th>
       <th>ra</th>
       <th>dec</th>
-      <th>z</th>
     </tr>
   </thead>
   <tbody>
@@ -178,31 +197,26 @@ ra,dec,z,col_3,col_4,col_5
       <th>0</th>
       <td>30.611735</td>
       <td>-6.356909</td>
-      <td>23.901826</td>
     </tr>
     <tr>
       <th>1</th>
       <td>30.610781</td>
       <td>-6.350381</td>
-      <td>22.385773</td>
     </tr>
     <tr>
       <th>2</th>
       <td>30.596478</td>
       <td>-6.346152</td>
-      <td>23.948118</td>
     </tr>
     <tr>
       <th>3</th>
       <td>30.592680</td>
       <td>-6.344521</td>
-      <td>23.427314</td>
     </tr>
     <tr>
       <th>4</th>
       <td>30.601111</td>
       <td>-6.338650</td>
-      <td>21.660045</td>
     </tr>
   </tbody>
 </table>
@@ -217,11 +231,11 @@ ra,dec,z,col_3,col_4,col_5
 <li><p>write a python code to plot dec(on Y-axis) vs ra(on X-axis) of the objects passed in the dataFrame.</p>
 <p>This plot will look very dense, so in order to visually see the points distributed on the (ra,dec) plane, downsample the number of points by 100 and again plot.</p>
 </li>
-<li><p>In order to downsample the points, use <code class="docutils literal notranslate"><span class="pre">numpy.random.choise()</span></code> function.</p></li>
+<li><p>In order to downsample the points, use <code class="docutils literal notranslate"><span class="pre">numpy.random.choice()</span></code> function.</p></li>
 </ul>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -260,35 +274,14 @@ ra,dec,z,col_3,col_4,col_5
 </section>
 <section id="On-sky-distance-between-two-points-on-the-surface-of-a-unit-sphere">
 <h2><code class="docutils literal notranslate"><span class="pre">On-sky</span> <span class="pre">distance</span></code> between two points on the surface of a unit sphere<a class="headerlink" href="#On-sky-distance-between-two-points-on-the-surface-of-a-unit-sphere" title="Link to this heading"></a></h2>
-<p>In spherical cartesian coordinates : <span class="math notranslate nohighlight">\(\bar{r} = \bar{r}(r,\theta,\phi)\)</span></p>
-<p>and the unit vector :</p>
-<div class="math notranslate nohighlight">
-\[\hat{r}_i = \sin(\theta_i) \cos(\phi_i) + \sin(\theta_i) \sin(\phi_i) + \cos(\theta_i), \quad {\rm \text{for }} i^{th} {\rm \text{ coordinate}}\]</div>
-<p>In coordinates of a galaxy in celestial coordinate system (unit shpere) : <span class="math notranslate nohighlight">\((\alpha,\delta)\)</span></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
-&amp;\alpha \equiv {\rm \text{ra}},\quad \delta \equiv {\rm \text{ dec}} \\
-&amp;\alpha = \phi,\quad \delta = \left(\frac{\pi}{2} - \theta \right) \\
-&amp;\hat{r}_i = \cos(\delta_i) \cos(\alpha_i) + \cos(\delta_i) \sin(\alpha_i) + \sin(\delta_i) \\
-&amp;r_1=r_2=1, \quad \rm{\text{ a unit sphere}} \\
-\end{align*}\end{split}\]</div>
-<p>For <span class="math notranslate nohighlight">\((\alpha_1,\delta_1)\)</span>, <span class="math notranslate nohighlight">\((\alpha_2,\delta_2)\)</span>, the angle <span class="math notranslate nohighlight">\(\psi\)</span> between them is given by :</p>
-<div class="math notranslate nohighlight">
-\[\psi = \cos^{-1}(\hat{r}_1 \cdot \hat{r}_2)\]</div>
-<p>where,</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
-\hat{r}_1 \cdot \hat{r}_2 &amp;= \cos(\delta_1)\cos(\delta_2) \cos(\alpha_1)\cos(\alpha_2) + \cos(\delta_1)\cos(\delta_2) \sin(\alpha_1)\sin(\alpha_2) + \sin(\delta_1)\sin(\delta_2) \\
-\hat{r}_1 \cdot \hat{r}_2 &amp;= \cos(\delta_1)\cos(\delta_2) \left( \cos(\alpha_1 - \alpha_2) \right) + \sin(\delta_1)\sin(\delta_2)
-\end{align*}\end{split}\]</div>
-<p>Thus, given <span class="math notranslate nohighlight">\((\alpha_1,\delta_1)\)</span>, <span class="math notranslate nohighlight">\((\alpha_2,\delta_2)\)</span>, we can compute the angle <span class="math notranslate nohighlight">\(\psi\)</span>.</p>
-<p>Using : distance formula on the arc of a cirle :</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
-&amp;s\  = r \times \psi, \\
-\text{but, } &amp;r_1=r_2=1 \\
-&amp;s\ =\psi\ (radians)
-\end{align*}\end{split}\]</div>
+<p>Given the spherical coordinate system, we can express the points in as</p>
+<p><span class="math notranslate nohighlight">\(\vec{r_i} = r_i \cdot (\sin(90 -\delta_i) \cos\alpha_i \ \hat{x}+ \sin(90 -\delta_i) \sin\alpha_i \ \hat{y} + \cos(90 -\delta_i) \ \hat{z})\)</span>, <span class="math notranslate nohighlight">\(\hspace{0.2cm}\)</span>for <span class="math notranslate nohighlight">\(\mathrm{i \in (1,2)}\)</span>. Here <span class="math notranslate nohighlight">\(\alpha_i\)</span> and <span class="math notranslate nohighlight">\(\delta_i\)</span> are the right ascension and declination for <span class="math notranslate nohighlight">\(i^{\rm th}\)</span> point.</p>
+<p>We will first compute the cosine of the angle <span class="math notranslate nohighlight">\(\theta\)</span> between the points using :</p>
+<p><span class="math notranslate nohighlight">\(\cos(\theta)=\frac{\vec{r_1}\cdot\vec{r_2}}{r_1 r_2}\)</span></p>
+<p>Given that these points are on a unit sphere we can set <span class="math notranslate nohighlight">\(r_1=r_2=1\)</span> and get the value of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>Using: <span class="math notranslate nohighlight">\(\mathrm{arc\_distance}=s=r \times \theta\)</span>, we obtain the distance between the two points having position(<span class="math notranslate nohighlight">\(\alpha_1\)</span>, <span class="math notranslate nohighlight">\(\delta_1\)</span>) and (<span class="math notranslate nohighlight">\(\alpha_2\)</span>, <span class="math notranslate nohighlight">\(\delta_2\)</span>), respectively.</p>
+<p>Since <span class="math notranslate nohighlight">\(r_1=r_2=1\)</span>,</p>
+<p><span class="math notranslate nohighlight">\(\Rightarrow s=\theta\)</span> (radians)</p>
 <div class="admonition note">
 <p class="admonition-title fa fa-exclamation-circle">Exercise: Using the above formula</p>
 <ul>
@@ -298,7 +291,7 @@ ra,dec,z,col_3,col_4,col_5
 </ul>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rad_to_arcsec</span> <span class="o">=</span> <span class="mf">180.0</span><span class="o">*</span><span class="mf">3600.</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
@@ -319,8 +312,7 @@ ra,dec,z,col_3,col_4,col_5
 
     <span class="c1">#due to precision errors, sometimes psi &gt; 1 , e.g. 1.0000000000000000000001</span>
     <span class="c1">#in such a case np.arccos funciton will complaint. So handle that now.</span>
-    <span class="k">if</span> <span class="n">psi</span><span class="o">&gt;</span><span class="mf">1.0</span><span class="p">:</span>
-        <span class="n">psi</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">psi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span><span class="o">*</span> <span class="n">rad_to_arcsec</span>
     <span class="k">return</span> <span class="n">dist</span>
@@ -329,7 +321,7 @@ ra,dec,z,col_3,col_4,col_5
 </div>
 <p># Running and testing the distance computation code:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creating tuple of values from ra,dec of each object</span>
@@ -339,7 +331,7 @@ ra,dec,z,col_3,col_4,col_5
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;obj1 0: </span><span class="si">{</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span>
@@ -382,7 +374,7 @@ distance: 23.7466131834144 arcsec
 </ul>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
@@ -435,9 +427,10 @@ distance: 23.7466131834144 arcsec
     <span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">obj1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coords1</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">jj</span><span class="p">,</span><span class="n">obj2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coords2</span><span class="p">):</span>
             <span class="n">dist</span> <span class="o">=</span> <span class="n">dist_betw_two_obj</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span><span class="n">obj2</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;=</span> <span class="n">rmax</span><span class="p">:</span>
+            <span class="k">if</span> <span class="mi">0</span><span class="o">&lt;=</span><span class="n">dist</span> <span class="o">&lt;=</span> <span class="n">rmax</span><span class="p">:</span>
                 <span class="n">nnids</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jj</span><span class="p">)</span>
                 <span class="n">distances</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+                <span class="c1">#print(obj1, obj2, ii,dist)</span>
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span><span class="n">nnids</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span><span class="n">distances</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">nnids</span><span class="p">,</span><span class="n">distances</span>
@@ -457,7 +450,7 @@ distance: 23.7466131834144 arcsec
 </ul>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Running and testing find_neighbour_points</span>
@@ -523,12 +516,12 @@ object index, neighbours indices list, neighbours distances list
 47 [] []
 48 [] []
 49 [] []
-CPU times: user 41.7 ms, sys: 520 µs, total: 42.2 ms
-Wall time: 37.3 ms
+CPU times: user 305 ms, sys: 15.6 ms, total: 321 ms
+Wall time: 312 ms
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Running and testing query_neighbour_points</span>
@@ -599,12 +592,12 @@ object index, neighbours indices list, neighbours distances list
 47 [47] [0.0]
 48 [48] [0.0]
 49 [49] [0.0]
-CPU times: user 53.5 ms, sys: 4.54 ms, total: 58.1 ms
-Wall time: 49.6 ms
+CPU times: user 343 ms, sys: 23.9 ms, total: 367 ms
+Wall time: 351 ms
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nth</span> <span class="o">=</span> <span class="mi">15</span>
@@ -637,7 +630,7 @@ distances: [5.475958296970058, 13.47975484115049, 10.276694006812336]
 
 Accessing the neighbour coordinates of the 15th object:
 14 (30.564297942270603, -6.322030429805476)
-16 (30.56234780563957, -6.319398928221537)
+16 (30.562347805639572, -6.319398928221537)
 44 (30.568297869918087, -6.3202347701814166)
 </pre></div></div>
 </div>
@@ -655,7 +648,7 @@ Accessing the neighbour coordinates of the 15th object:
 <p>I’m plotting the neighbours of <span class="math notranslate nohighlight">\(15^{th}\)</span> point from the catalog. And also printing their <code class="docutils literal notranslate"><span class="pre">indices</span></code> and <code class="docutils literal notranslate"><span class="pre">distances</span></code> to compare the stored distances by eye!</p>
 <p>Point marked as <span class="math notranslate nohighlight">\(\star\)</span> is the <span class="math notranslate nohighlight">\(15^{th}\)</span> point. Other points are its neighbours.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">demoid</span> <span class="o">=</span> <span class="mi">15</span>
@@ -719,7 +712,7 @@ index--&gt; distance            color
 <h2>Using k-d tree algorithm to query the neighbour points within a given distance<a class="headerlink" href="#Using-k-d-tree-algorithm-to-query-the-neighbour-points-within-a-given-distance" title="Link to this heading"></a></h2>
 <p>time complexity ~ <span class="math notranslate nohighlight">\(\mathcal{O}(n\log{}n)\)</span></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">spatial</span>
@@ -743,7 +736,7 @@ index--&gt; distance            color
 </ul>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">find_neighbours</span><span class="p">:</span>
@@ -806,7 +799,7 @@ index--&gt; distance            color
 <h3>A sanity check<a class="headerlink" href="#A-sanity-check" title="Link to this heading"></a></h3>
 <p>Testing conversion of (ra,dec) to (x,y,z)</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here we are not passing `tra` and `tdec` while initialising the class `find_neighbours`</span>
@@ -838,7 +831,7 @@ shapes of (x,y,z) tuple array: (220622, 3)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -866,7 +859,7 @@ array([[ 0.8553461 ,  0.50608675, -0.11072151],
 </ul>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">demo_ids</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">]</span> <span class="c1">#9,15</span>
@@ -897,7 +890,7 @@ coordinate of test objects: [[ 0.85581232  0.50543305 -0.11010311]]
 </div>
 <p># This time Initialize class with by passing <code class="docutils literal notranslate"><span class="pre">tra</span></code> and <code class="docutils literal notranslate"><span class="pre">tdec</span></code> arguments and set up the tree</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">code_tree</span> <span class="o">=</span> <span class="n">find_neighbours</span><span class="p">(</span><span class="n">tra</span><span class="o">=</span><span class="n">coords</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">tdec</span><span class="o">=</span><span class="n">coords</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
@@ -914,7 +907,7 @@ Initializing with sphere of radius, r=1.
 </div>
 <p># Query the neighbours of demo objects</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idx</span><span class="o">=</span><span class="n">code_tree</span><span class="o">.</span><span class="n">query_within_rmax</span><span class="p">(</span><span class="n">demo_ra</span><span class="p">,</span> <span class="n">demo_dec</span><span class="p">)</span>
@@ -931,7 +924,7 @@ Searching for 1 number of objects in the catalog with rmax=15 arcsec.
 </div>
 <p># Go back to brute force output and compare this result…. does it match?</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idx</span>
@@ -939,7 +932,7 @@ Searching for 1 number of objects in the catalog with rmax=15 arcsec.
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -953,7 +946,7 @@ array([list([14, 15, 16, 44])], dtype=object)
 <h2>Compare the computer time required by our brute force algorithm vs the k-d tree algorithm<a class="headerlink" href="#Compare-the-computer-time-required-by-our-brute-force-algorithm-vs-the-k-d-tree-algorithm" title="Link to this heading"></a></h2>
 <p>First let’s use k-d tree to query neighbours within <code class="docutils literal notranslate"><span class="pre">rmax</span></code>=15 arcsec for each object within the catalog.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> idx=code_tree.query_within_rmax(coords[:,0], coords[:,1])
@@ -966,14 +959,14 @@ array([list([14, 15, 16, 44])], dtype=object)
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Searching for 220622 number of objects in the catalog with rmax=15 arcsec.
-CPU times: user 589 ms, sys: 15.6 ms, total: 605 ms
-Wall time: 602 ms
+CPU times: user 1.89 s, sys: 90.9 ms, total: 1.98 s
+Wall time: 1.97 s
 </pre></div></div>
 </div>
 <p>Reminder: full catalog has about 2,20,000 objects… and k-d tree found neighbours for each one of them in 1-2 seconds. (This time will vary depending on your computer’s ability.)</p>
 <p>Now let’s use the brute force method only for 1000 objects.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> nnids,distances = query_neighbour_points(coords[:1000], coords[:1000], rmax=15, verbose=False)
@@ -985,8 +978,8 @@ Wall time: 602 ms
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-CPU times: user 7.94 s, sys: 0 ns, total: 7.94 s
-Wall time: 7.94 s
+CPU times: user 1min 47s, sys: 348 ms, total: 1min 47s
+Wall time: 1min 47s
 </pre></div></div>
 </div>
 <p>You will notice that as the number of points to search for increases in <code class="docutils literal notranslate"><span class="pre">set1</span></code>, the performance of the k-d tree algorithm will keep on improving over the brute force method.</p>
@@ -1000,13 +993,24 @@ Wall time: 7.94 s
 <li><p>access the results of cKDTree and identify neighbours of each obejct in <code class="docutils literal notranslate"><span class="pre">set1</span></code> into the <code class="docutils literal notranslate"><span class="pre">set2</span></code>.</p></li>
 <li><p>access the coordinates and distances of each neighbour of every point in <code class="docutils literal notranslate"><span class="pre">set1</span></code>.</p></li>
 </ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </section>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="astrotwin_day_2_hands_on.html" class="btn btn-neutral float-left" title="Day 2 - Finding neighbours" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="astrotwin_day_3_hands_on.html" class="btn btn-neutral float-right" title="Day 3 - Get the Weak Lensing Signals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
