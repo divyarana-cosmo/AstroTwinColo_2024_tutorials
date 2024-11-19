@@ -23,8 +23,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Day 5 - Environmental dependence of matter profiles" href="astrotwin_day_5_hands_on.html" />
-    <link rel="prev" title="Day 3 - Get the Weak Lensing Signals" href="astrotwin_day_3_hands_on.html" /> 
+    <link rel="next" title="Day 4 Solutions" href="solutions_astrotwin_day_4_hands_on.html" />
+    <link rel="prev" title="Day 3 Solutions" href="solutions_astrotwin_day_3_hands_on.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,7 +53,9 @@
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_2_hands_on.html">Day 2 - Finding neighbours</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solutions_astrotwin_day_2_hands_on.html">Day 2 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_3_hands_on.html">Day 3 - Get the Weak Lensing Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions_astrotwin_day_3_hands_on.html">Day 3 Solutions</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Day 4 - Model the weak lensing signal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions_astrotwin_day_4_hands_on.html">Day 4 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_5_hands_on.html">Day 5 - Environmental dependence of matter profiles</a></li>
 </ul>
 
@@ -83,8 +85,8 @@
              
   <section id="Day-4---Model-the-weak-lensing-signal">
 <h1>Day 4 - Model the weak lensing signal<a class="headerlink" href="#Day-4---Model-the-weak-lensing-signal" title="Link to this heading"></a></h1>
-<p>This session assumes that you have your own weak lensing signal in order to model them. We understand coding up the lensing measurement part(Day 3 tutorial) is quite tedious. So in case if you don’t have the signal from yesterday’s session, we will provide you the output file for modelling and getting the halo mass constraits out of it. Similar to day 3 tutorial, the reader has to fill in the blanks(??) in the code snippets.</p>
-<p>In last tutorial/lecture, we have discussed and coded up the R.H.S. of the equation given below, which is nothing but the <strong>observed weak lensing signal</strong> (excess surface mass density).</p>
+<p>This session assumes that you have your weak lensing signal ready for modeling. We understand that coding the lensing measurement portion (as covered in the Day 3 tutorial) can be quite tedious. If you don’t have the signal from yesterday’s session, we will provide you with the output file needed for modeling and obtaining halo mass constraints. Similar to the Day 3 tutorial, you will need to fill in the blanks (??) in the code snippets provided.</p>
+<p>In last tutorial/lecture, we have discussed and coded up the R.H.S. of the equation given below, which is the <strong>observed weak lensing signal</strong> (excess surface mass density).</p>
 <div class="math notranslate nohighlight">
 \[\Delta \Sigma (R) = \frac{\sum_{ls} w_{\rm ls} e_{t,ls} (\Sigma^{-1}_{\rm crit})^{-1}}{2\mathcal{R} \sum_{ls} w_{\rm ls}}\]</div>
 <p>Now our aim today is to predict <span class="math notranslate nohighlight">\(\Delta\Sigma(R)\)</span>, which can be expressed as -</p>
@@ -202,9 +204,9 @@ such bins. Plus, the clusters are very bright in the inner regions, due to which
             <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="err">??</span><span class="p">:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="err">??</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="err">??</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="err">??</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="err">??</span><span class="p">:</span>
-                <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="err">??</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="err">??</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="err">??</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="err">??</span> <span class="n">np</span><span class="o">.</span><span class="err">??</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="err">??</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="err">??</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">value</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="err">??</span><span class="o">.</span>
             <span class="n">sig</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="n">k</span>
             <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span>
         <span class="k">return</span> <span class="n">sig</span>
@@ -221,7 +223,7 @@ such bins. Plus, the clusters are very bright in the inner regions, due to which
                 <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="err">??</span><span class="n">cosh</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="err">??</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="err">??</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span> <span class="c1">#numpy default log is base e.</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="mf">2.0</span><span class="o">/</span>x**<span class="o">??</span>
             <span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="err">??</span><span class="n">cos</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="err">??</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="err">??</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="err">??</span><span class="n">cos</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="err">??</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="err">??</span> <span class="n">np</span><span class="o">.</span><span class="err">??</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="mf">2.0</span><span class="o">/</span>x**<span class="o">??</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
@@ -297,7 +299,7 @@ Text(0, 0.5, &#39;$\\rho(r)$&#39;)
 <li><p>print the output of : print(model(np.linspace(0.2,2.0,5), 13, 6))</p></li>
 </ul>
 </div>
-<p>Now we will use the above model function to do the fitting to our measurements. At present we are using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html">curve_fit</a> function from scipy to get the best fit model parameters. More advanced reader can use sophasticated tools like <a class="reference external" href="https://emcee.readthedocs.io/">emcee</a> to do a MCMC on this.</p>
+<p>Now we will use the above model function to do the fitting to our measurements. At present we are using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html">curve_fit</a> function from scipy to get the best fit model parameters. More advanced reader can use sophasticated tools like <a class="reference external" href="https://emcee.readthedocs.io/">emcee</a> to do a bayesian analysis on this.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -310,7 +312,7 @@ Text(0, 0.5, &#39;$\\rho(r)$&#39;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/astrotwin_dsigma.dat&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;/home/idies/workspace/Storage/divyar/persistent/astrotwin_dsigma.dat&#39;</span><span class="p">)</span>
 <span class="n">x</span>    <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">y</span>    <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">yerr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
@@ -353,22 +355,14 @@ Text(0, 0.5, &#39;$\\rho(r)$&#39;)
 </div>
 <p>Given all the machinery to the reader to get the weak lensing signal and model them to constraint halo masses. We encourage reader to try out different cuts on their cluster sample and check the variation in halo masses.</p>
 <p><strong>We want to stress on the point that in the current tutorial we did a very simplistic job both in measurements as well as modelling. Please follow the references given in the tutorials as well as lectures to do a more rigorous analysis.</strong></p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="astrotwin_day_3_hands_on.html" class="btn btn-neutral float-left" title="Day 3 - Get the Weak Lensing Signals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="astrotwin_day_5_hands_on.html" class="btn btn-neutral float-right" title="Day 5 - Environmental dependence of matter profiles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="solutions_astrotwin_day_3_hands_on.html" class="btn btn-neutral float-left" title="Day 3 Solutions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="solutions_astrotwin_day_4_hands_on.html" class="btn btn-neutral float-right" title="Day 4 Solutions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

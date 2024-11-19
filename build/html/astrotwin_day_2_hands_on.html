@@ -73,7 +73,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="solutions_astrotwin_day_2_hands_on.html">Day 2 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_3_hands_on.html">Day 3 - Get the Weak Lensing Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions_astrotwin_day_3_hands_on.html">Day 3 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_4_hands_on.html">Day 4 - Model the weak lensing signal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solutions_astrotwin_day_4_hands_on.html">Day 4 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_5_hands_on.html">Day 5 - Environmental dependence of matter profiles</a></li>
 </ul>
 
@@ -342,7 +344,7 @@ randomly picked indices:
 </section>
 <section id="On-sky-distance-between-two-points-on-the-surface-of-a-unit-sphere.">
 <h2><code class="docutils literal notranslate"><span class="pre">On-sky</span> <span class="pre">distance</span></code> between two points on the surface of a unit sphere.<a class="headerlink" href="#On-sky-distance-between-two-points-on-the-surface-of-a-unit-sphere." title="Link to this heading"></a></h2>
-<p><img alt="0ca3d4f2f5374d0bbadaf023db506150" class="no-scaled-link" src="_images/Equitorial_coord_sys.jpg" style="width: 400px; height: 300px;" /></p>
+<p><img alt="6e7606c653754647b293c41079fab8b4" class="no-scaled-link" src="_images/Equitorial_coord_sys.jpg" style="width: 400px; height: 300px;" /></p>
 <p>Given the spherical coordinate system, we can express the points in as</p>
 <p><span class="math notranslate nohighlight">\(\vec{r_i} = r_i \cdot (\sin(90 -\delta_i) \cos\alpha_i \ \hat{x}+ \sin(90 -\delta_i) \sin\alpha_i \ \hat{y} + \cos(90 -\delta_i) \ \hat{z})\)</span>, <span class="math notranslate nohighlight">\(\hspace{0.2cm}\)</span>for <span class="math notranslate nohighlight">\(\mathrm{i \in (1,2)}\)</span>. Here <span class="math notranslate nohighlight">\(\alpha_i\)</span> and <span class="math notranslate nohighlight">\(\delta_i\)</span> are the right ascension and declination for <span class="math notranslate nohighlight">\(i^{\rm th}\)</span> point.</p>
 <p>We will first compute the cosine of the angle <span class="math notranslate nohighlight">\(\theta\)</span> between the points using :</p>
@@ -393,7 +395,7 @@ randomly picked indices:
 </ul>
 </div>
 <p>I get the following:</p>
-<p><img alt="eebfd73c50d246df8f012a0f783a42b3" class="no-scaled-link" src="_images/onsky_distance_test.png" style="width: 300px; height: 70px;" /></p>
+<p><img alt="81f2702594d64574a3f1c1fe16dbba29" class="no-scaled-link" src="_images/onsky_distance_test.png" style="width: 300px; height: 70px;" /></p>
 </section>
 <section id="Brute-force-search-for-neighbour-objects-within-a-specified-distance">
 <h2>Brute force search for neighbour objects within a specified distance<a class="headerlink" href="#Brute-force-search-for-neighbour-objects-within-a-specified-distance" title="Link to this heading"></a></h2>
@@ -605,8 +607,8 @@ Accessing the neighbour coordinates of the 15th object:
 </div>
 <p>I’m plotting the neighbours of <span class="math notranslate nohighlight">\(15^{th}\)</span> point from the catalog. And also printing their <code class="docutils literal notranslate"><span class="pre">indices</span></code> and <code class="docutils literal notranslate"><span class="pre">distances</span></code> to compare the stored distances by eye!</p>
 <p>Point marked as <span class="math notranslate nohighlight">\(\star\)</span> is the <span class="math notranslate nohighlight">\(15^{th}\)</span> point. Other points are its neighbours.</p>
-<p><img alt="75ea524176a941ad9a060a48bfe01c49" class="no-scaled-link" src="_images/neighbours_of_15th_obj.png" style="width: 500px; height: 400px;" /></p>
-<p><img alt="945fe34ece9d4fa78db1c95acdb02e22" class="no-scaled-link" src="_images/neighbours_printed.png" style="width: 300px; height: 80px;" /></p>
+<p><img alt="37bf46cad21944459d052d9146313540" class="no-scaled-link" src="_images/neighbours_of_15th_obj.png" style="width: 500px; height: 400px;" /></p>
+<p><img alt="c025d79da24e46bdba05646959581488" class="no-scaled-link" src="_images/neighbours_printed.png" style="width: 300px; height: 80px;" /></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
@@ -758,7 +760,7 @@ Accessing the neighbour coordinates of the 15th object:
 </pre></div>
 </div>
 </div>
-<p><img alt="6b0dda633995410a9f2a761a5e6feaf3" class="no-scaled-link" src="_images/coordinate_conversion_test.png" style="width: 400px; height: 200px;" /></p>
+<p><img alt="ca03fb6835b1481c98ff955c770b9237" class="no-scaled-link" src="_images/coordinate_conversion_test.png" style="width: 400px; height: 200px;" /></p>
 </section>
 <section id="Compare-the-output-of-our-brute-force-algorithm-with-cKDTree-algorithm-on-few-Demo-objects">
 <h3>Compare the output of our brute force algorithm with cKDTree algorithm on few Demo objects<a class="headerlink" href="#Compare-the-output-of-our-brute-force-algorithm-with-cKDTree-algorithm-on-few-Demo-objects" title="Link to this heading"></a></h3>
