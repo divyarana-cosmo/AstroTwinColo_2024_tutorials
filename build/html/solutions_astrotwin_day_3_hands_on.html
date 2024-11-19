@@ -82,7 +82,7 @@
   <section id="Day-3-Solutions">
 <h1>Day 3 Solutions<a class="headerlink" href="#Day-3-Solutions" title="Link to this heading"></a></h1>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#loading the required packages</span>
@@ -97,7 +97,7 @@
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_xyz</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">):</span>
@@ -111,7 +111,7 @@
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">get_xyz</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">60</span><span class="p">))</span>
@@ -127,7 +127,7 @@
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># selection cut on the lens sample</span>
@@ -148,15 +148,7 @@
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sanity cheaks on the source files</span>
@@ -176,7 +168,7 @@
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># following surhud&#39;s lectures</span>
@@ -200,7 +192,7 @@
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">get_et</span><span class="p">(</span><span class="n">lra</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ldec</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sra</span><span class="o">=</span><span class="mf">0.123</span><span class="p">,</span> <span class="n">sdec</span><span class="o">=</span><span class="mf">0.045</span><span class="p">,</span> <span class="n">se1</span> <span class="o">=</span> <span class="mf">4.5e-2</span><span class="p">,</span> <span class="n">se2</span> <span class="o">=</span> <span class="mf">1.7e-2</span><span class="p">))</span>
@@ -216,7 +208,7 @@
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[70]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_sigma_crit_inv</span><span class="p">(</span><span class="n">lzred</span><span class="p">,</span> <span class="n">szred</span><span class="p">,</span> <span class="n">cc</span><span class="p">):</span>
@@ -233,7 +225,7 @@
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.cosmology</span> <span class="kn">import</span> <span class="n">FlatLambdaCDM</span>
@@ -251,7 +243,7 @@
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="k">def</span> <span class="nf">run_pipe</span><span class="p">(</span><span class="n">Omegam</span><span class="o">=</span><span class="mf">0.315</span><span class="p">,</span> <span class="n">rmin</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">rmax</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">zdiff</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">outputfile</span> <span class="o">=</span> <span class="s1">&#39;astrotwin_dsigma.dat&#39;</span><span class="p">):</span>
@@ -382,7 +374,7 @@
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_pipe</span><span class="p">()</span>
@@ -397,162 +389,162 @@
 number of lenses=560
 lenses tree is ready
 
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0000.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0001.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0002.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0003.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0004.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0005.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0006.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0007.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0008.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0009.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0010.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0011.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0012.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0013.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0014.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0015.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0016.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0017.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0018.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0019.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0020.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0021.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0022.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0023.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0024.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0025.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0026.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0027.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0028.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0029.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0030.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0031.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0032.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0033.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0034.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0035.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0036.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0037.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0038.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0039.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0040.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0041.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0042.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0043.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0044.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0045.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0046.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0047.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0048.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0049.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0050.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0051.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0052.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0053.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0054.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0055.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0056.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0057.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0058.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0059.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0060.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0061.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0062.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0063.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0064.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0065.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0066.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0067.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0068.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0069.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0070.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0071.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0072.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0073.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0074.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0075.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0076.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0077.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0078.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0079.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0080.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0081.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0082.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0083.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0084.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0085.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0086.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0087.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0088.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0089.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0090.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0091.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0092.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0093.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0094.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0095.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0096.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0097.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0098.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0099.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0100.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0101.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0102.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0103.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0104.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0105.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0106.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0107.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0108.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0109.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0110.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0111.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0112.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0113.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0114.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0115.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0116.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0117.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0118.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0119.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0120.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0121.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0122.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0123.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0124.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0125.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0126.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0127.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0128.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0129.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0130.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0131.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0132.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0133.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0134.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0135.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0136.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0137.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0138.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0139.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0140.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0141.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0142.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0143.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0144.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0145.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0146.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0147.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0148.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0149.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0150.dat
-/home/idies/workspace/Storage/divyar/IAGRG_2022/DataStore/hsc/0151.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0000.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0001.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0002.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0003.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0004.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0005.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0006.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0007.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0008.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0009.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0010.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0011.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0012.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0013.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0014.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0015.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0016.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0017.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0018.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0019.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0020.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0021.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0022.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0023.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0024.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0025.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0026.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0027.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0028.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0029.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0030.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0031.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0032.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0033.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0034.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0035.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0036.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0037.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0038.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0039.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0040.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0041.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0042.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0043.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0044.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0045.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0046.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0047.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0048.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0049.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0050.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0051.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0052.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0053.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0054.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0055.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0056.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0057.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0058.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0059.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0060.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0061.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0062.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0063.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0064.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0065.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0066.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0067.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0068.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0069.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0070.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0071.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0072.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0073.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0074.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0075.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0076.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0077.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0078.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0079.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0080.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0081.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0082.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0083.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0084.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0085.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0086.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0087.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0088.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0089.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0090.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0091.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0092.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0093.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0094.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0095.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0096.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0097.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0098.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0099.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0100.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0101.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0102.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0103.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0104.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0105.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0106.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0107.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0108.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0109.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0110.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0111.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0112.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0113.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0114.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0115.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0116.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0117.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0118.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0119.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0120.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0121.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0122.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0123.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0124.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0125.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0126.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0127.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0128.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0129.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0130.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0131.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0132.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0133.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0134.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0135.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0136.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0137.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0138.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0139.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0140.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0141.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0142.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0143.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0144.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0145.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0146.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0147.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0148.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0149.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0150.dat
+/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/hsc/0151.dat
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -561,7 +553,7 @@ lenses tree is ready
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;astrotwin_dsigma.dat&#39;</span><span class="p">)</span>
@@ -580,7 +572,7 @@ lenses tree is ready
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/solutions_astrotwin_day_3_hands_on_13_0.png" src="_images/solutions_astrotwin_day_3_hands_on_13_0.png" />
+<img alt="_images/solutions_astrotwin_day_3_hands_on_12_0.png" src="_images/solutions_astrotwin_day_3_hands_on_12_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">

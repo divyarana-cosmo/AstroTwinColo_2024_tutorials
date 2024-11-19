@@ -94,11 +94,11 @@
              
   <section id="Day-3---Get-the-Weak-Lensing-Signals">
 <h1>Day 3 - Get the Weak Lensing Signals<a class="headerlink" href="#Day-3---Get-the-Weak-Lensing-Signals" title="Link to this heading"></a></h1>
-<p>In this session, we will use the things described in the last two sessions and make a weak lensing measurement pipeline for ourselves. We will start with writing out the different steps required to get the pipeline ready. We then code up each of them as individual functions, which will be called in our main code.</p>
-<p>We are here studying the matter distribution around SDSS redmapper galaxy clusters - <a class="reference external" href="https://arxiv.org/abs/1303.3562">arXiv:1303.3562</a> by the weak lensing technique using shape catalog data from HSC S16A data - <a class="reference external" href="https://arxiv.org/abs/1705.06745">arXiv:1705.06745</a>. We suggest readers to have a look at these references to have a better understanding of data provided to them. The readers can also compare their results with the same study done on these clusters using shape catalog from SDSS -
-<a class="reference external" href="https://arxiv.org/abs/1707.01907">arXiv:1707.01907</a>.</p>
-<p><strong>We highly suggest readers to make a separate notebook for this session as it will be useful for later use.</strong></p>
-<p><strong>In the codes below I have left some black spaces indicated using ??. Please fill up the ?? in the code below and make sure you are doing it with right equations and conversions.</strong></p>
+<p>In this session, we will build a weak lensing measurement pipeline by utilizing the concepts covered in the previous two sessions. We will begin by outlining the various steps needed to prepare the pipeline. Then, we will implement each step as individual functions that can be called in our main code.</p>
+<p>We are focusing on the matter distribution around SDSS redmapper galaxy clusters, as described in the paper <a class="reference external" href="https://arxiv.org/abs/1303.3562">arXiv:1303.3562</a>, using the weak lensing technique with shape catalogue data from HSC S16A (<a class="reference external" href="https://arxiv.org/abs/1705.06745">arXiv:1705.06745</a>). We recommend that readers familiarize themselves with these references to gain a better understanding of the data provided. Additionally, readers can compare their results with similar studies conducted on
+these clusters using the shape catalogue from SDSS (<a class="reference external" href="https://arxiv.org/abs/1707.01907">arXiv:1707.01907</a>).</p>
+<p><strong>We highly encourage readers to create a separate notebook for this session, as it will be useful for future reference.</strong></p>
+<p><strong>In the code snippets provided below, you will notice some blanks indicated by ??. Please fill in the ?? with the appropriate equations and conversions.</strong></p>
 <section id="Required-Steps">
 <h2>Required Steps<a class="headerlink" href="#Required-Steps" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -177,7 +177,7 @@
 </section>
 <section id="Computing-the-tangential-shear-e_{\rm-t}-and-inverse-critical-density-\Sigma^{-1}_{\rm-crit}">
 <h2>Computing the tangential shear <span class="math notranslate nohighlight">\(e_{\rm t}\)</span> and inverse critical density <span class="math notranslate nohighlight">\(\Sigma^{-1}_{\rm crit}\)</span><a class="headerlink" href="#Computing-the-tangential-shear-e_{\rm-t}-and-inverse-critical-density-\Sigma^{-1}_{\rm-crit}" title="Link to this heading"></a></h2>
-<p>Now we will follow the formalism described in Prof Surhud More’s lectures. We will first code up function to compute tangential component of the ellipticity given the positions for the lenses (<span class="math notranslate nohighlight">\(\alpha_l\)</span>, <span class="math notranslate nohighlight">\(\delta_l\)</span>) and sources(<span class="math notranslate nohighlight">\(\alpha_s\)</span>, <span class="math notranslate nohighlight">\(\delta_s\)</span>) along with the shape measurements (<span class="math notranslate nohighlight">\(e_1\)</span>,<span class="math notranslate nohighlight">\(e_2\)</span>) for the sources.</p>
+<p>Now we will follow the formalism described in the lectures. We will first code up the function to compute the tangential component of the ellipticity given the positions for the lenses (<span class="math notranslate nohighlight">\(\alpha_l\)</span>, <span class="math notranslate nohighlight">\(\delta_l\)</span>) and sources(<span class="math notranslate nohighlight">\(\alpha_s\)</span>, <span class="math notranslate nohighlight">\(\delta_s\)</span>) along with the shape measurements (<span class="math notranslate nohighlight">\(e_1\)</span>,<span class="math notranslate nohighlight">\(e_2\)</span>) for the sources.</p>
 <p>We will first compute angle <span class="math notranslate nohighlight">\(\theta\)</span> between a given lens-source pair.</p>
 <div class="math notranslate nohighlight">
 \[\cos \theta = \cos \delta_l \cos \delta_s \cos(\alpha_l - \alpha_s) + \sin\delta_l \sin \delta_s\]</div>
@@ -188,9 +188,9 @@
 \[\sin \phi = \frac{-\sin \delta_l \cos \delta_s + \cos \delta_l \sin \delta_s  \cos(\alpha_s - \alpha_l)}{|\sin\theta|}\]</div>
 <div class="math notranslate nohighlight">
 \[\cos \phi =  \frac{\cos\delta_l \sin(\alpha_s - \alpha_l)}{|\sin\theta|}\]</div>
-<p>For more info related to above equations refer to the Notes for <a class="reference external" href="https://surhudm.github.io/Weaklensing_IAGRG/Weak_gravitational_lensing.html#Tangential-shear-computation">Tangential-shear-computation</a>.</p>
-<p>Coding up these equations requires trigonometric functions from numpy package. Please check them out - <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sin.html">sin</a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.cos.html#numpy.cos">cos</a></p>
-<p><strong>Please note that these functions by default uses angles in radians and here we are working with catalog data with (ra,dec) in degrees. So, we need to do the needful conversion first</strong></p>
+<p>For more info related to the above equations refer to the Notes for <a class="reference external" href="https://surhudm.github.io/Weaklensing_IAGRG/Weak_gravitational_lensing.html#Tangential-shear-computation">Tangential-shear-computation</a>.</p>
+<p>Coding up these equations requires trigonometric functions from the NumPy package. Please check them out - <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sin.html">sin</a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.cos.html#numpy.cos">cos</a></p>
+<p><strong>Please note that these functions by default use angles in radians and here we are working with catalogue data with (ra, dec) in degrees. So, we need to do the needful conversion first</strong></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -211,10 +211,10 @@
     <span class="n">s_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">c_theta</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
     <span class="c1"># phi to get the compute the tangential shear</span>
-    <span class="n">c_phi</span>   <span class="o">=</span> <span class="err">??</span> <span class="o">*</span><span class="mf">1.0</span><span class="o">/</span><span class="n">s_theta</span>
+    <span class="n">c_phi</span>   <span class="o">=</span> <span class="err">??</span> <span class="o">*</span><span class="mf">1.0</span><span class="o">/??</span>
     <span class="n">s_phi</span>   <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ldec</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">sdec</span><span class="p">)</span> <span class="o">+</span> <span class="err">??</span> <span class="p">)</span><span class="o">*</span><span class="mf">1.0</span><span class="o">/</span><span class="n">s_theta</span>
     <span class="c1"># tangential shear</span>
-    <span class="n">e_t</span>     <span class="o">=</span> <span class="o">-</span> <span class="n">se1</span><span class="o">*</span><span class="p">(</span><span class="err">??</span><span class="p">)</span> <span class="o">-</span> <span class="n">se2</span><span class="o">*</span><span class="p">(</span><span class="err">??</span><span class="p">)</span>
+    <span class="n">e_t</span>     <span class="o">=</span> <span class="o">-</span> <span class="n">se1</span><span class="o">*</span><span class="p">(</span><span class="err">??</span><span class="p">)</span> <span class="err">??</span> <span class="n">se2</span><span class="o">*</span><span class="p">(</span><span class="err">??</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">e_t</span>
 <br/></pre></div>
@@ -227,11 +227,12 @@
 <li><p>running command : <strong>print(get_et(lra=0.0, ldec=0.0, sra=0.123, sdec=0.045, se1 = 4.5e-2, se2 = 1.7e-2))</strong> in the next cell below the function defination cell. Please add cell below using the insert option on the top.</p></li>
 </ul>
 </div>
-<p>we will now move on to writing a function to get <span class="math notranslate nohighlight">\(\Sigma^{-1}_{\rm crit} (z_l,z_s)\)</span> given the lense redshift (<span class="math notranslate nohighlight">\(z_l\)</span>) and source redshift (<span class="math notranslate nohighlight">\(z_s\)</span>) and it also needs a instance of astropy class (cc). Remember we need to create a instance for the astropy cosmo class given the input cosmological parameters. In the current code structure we will initiate the astopy cosmo class in our main code.</p>
-<p>To review you can refer to Day-1 docs page to see how astropy is used to get cosmological distances. Please note that here we are working in comoving coordinates to do the signal computations so the corresponding <span class="math notranslate nohighlight">\(\Sigma^{-1}_{\rm crit} (z_l,z_s)\)</span> is given as</p>
+<p>We will now proceed to write a function that calculates <span class="math notranslate nohighlight">\(\Sigma^{-1}_{\rm crit}(z_l, z_s)\)</span> given the lens redshift <span class="math notranslate nohighlight">\(z_l\)</span> and source redshift <span class="math notranslate nohighlight">\(z_s\)</span> . This function will also require an instance of the Astropy cosmology class (denoted as <code class="docutils literal notranslate"><span class="pre">cc</span></code>). In the current code structure, we will initialize the Astropy cosmology class in our main code.</p>
+<p>For reference, you can consult the Day-1 documentation to understand how Astropy is used for calculating cosmological distances.</p>
+<p>Please note that we are working in comoving coordinates to perform the signal computations, and the corresponding formula for (<span class="math notranslate nohighlight">\(\Sigma^{-1}_{\rm crit}(z_l, z_s)\)</span>) is given by:</p>
 <div class="math notranslate nohighlight">
-\[\Sigma^{-1}_{\rm crit}(z_l,z_s) = \frac{4\pi G}{c^2} \frac{d_{\rm ang}(z_l) d_{\rm ang}(z_l, z_s) (1 + z_l)^2} {d_{\rm ang}(z_s)}\]</div>
-<p>where <span class="math notranslate nohighlight">\(d_{\rm ang}(z)\)</span> is the angular diameter distance for redshift <span class="math notranslate nohighlight">\(z\)</span>.</p>
+\[\Sigma^{-1}_{\rm crit}(z_l, z_s) = \frac{4\pi G}{c^2} \frac{d_{\rm ang}(z_l) d_{\rm ang}(z_l, z_s) (1 + z_l)^2} {d_{\rm ang}(z_s)}\]</div>
+<p>where <span class="math notranslate nohighlight">\(d_{\rm ang}(z)\)</span> represents the angular diameter distance for redshift (z).</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -314,14 +315,6 @@
 <li><p>The projected distance array from last step then used to look for corresponding bin number in our binning scheme as described in the Global parameters. Then we use the above equations along with the above defined functions to get the values of array defined in step 3.</p></li>
 <li><p>As said in step 6, we run step 7-9 for all the source files in our directory and then write the resultant output in a file named by the Global Parameters.</p></li>
 </ol>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -494,7 +487,7 @@
 <section id="The-bias-corrected-measurements">
 <h2>The bias corrected measurements<a class="headerlink" href="#The-bias-corrected-measurements" title="Link to this heading"></a></h2>
 <p>For doing a bias corrected measurements one has to add few more things in our <span class="math notranslate nohighlight">\(\Delta \Sigma\)</span> expression. Interested reader can check this expression for <span class="math notranslate nohighlight">\(\Delta \Sigma\)</span> in <a class="reference external" href="https://arxiv.org/abs/2107.05641">arXiv:2107.05641</a> and can modify the above code to get the bias corrected measurements.</p>
-<p>Please note that within each source file we have already provided you the data coloumns required to do these computations.</p>
+<p>Please note that within each source file we have already provided you the data columns required to do these computations.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
