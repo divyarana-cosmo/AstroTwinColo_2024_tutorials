@@ -91,7 +91,7 @@
 <p>The catalog data is available by the name “redmapper_satellites.dat”</p>
 <section id="Lets-first-make-a-scatter-plot">
 <h2>Lets first make a scatter plot<a class="headerlink" href="#Lets-first-make-a-scatter-plot" title="Link to this heading"></a></h2>
-<p>Here we will make the plot between redshift and projected separation of satellite from the cluster center. We will then select the sample using the cuts on the separation. - lenses, <strong>/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/redmapper_satellites.dat</strong></p>
+<p>Here we will make the plot between redshift and projected separation of satellite from the cluster center. We will then select the sample using the cuts on the separation. - <strong>lenses: /home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/redmapper_satellites.dat</strong></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -109,26 +109,27 @@
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#putting the path of the lens catalog</span>
-<span class="n">len_path</span> <span class="o">=</span> <span class="s1">&#39;/Users/divyarana/github/iagrg_2022_weaklens/DataStore/redmapper_satellites.dat&#39;</span>
+<span class="n">len_path</span> <span class="o">=</span> <span class="s1">&#39;/home/idies/workspace/Storage/divyar/AstroTwin_Colo_2024/DataStore/redmapper_satellites.dat&#39;</span>
+
 <span class="n">lenses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">len_path</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1">#printing the columns in the file</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">lenses</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lenses</span><span class="p">[</span><span class="s1">&#39;zred&#39;</span><span class="p">],</span> <span class="n">lenses</span><span class="p">[</span><span class="s1">&#39;rsep[h-1Mpc]&#39;</span><span class="p">],</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.33</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="mf">0.2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.33</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="mf">0.6</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.6</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="p">,</span>  <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mf">0.33</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.6</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.33</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.33</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="mf">0.4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="p">,</span>  <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mf">0.33</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$z_{\rm red}$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R_{\rm sep} [h^{-1} Mpc]$&#39;</span><span class="p">)</span>
 
 <span class="c1">#printing the number of lenses in a selection cut</span>
-<span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">lenses</span><span class="p">[</span><span class="s1">&#39;zred&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">lenses</span><span class="p">[</span><span class="s1">&#39;zred&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mf">0.33</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">lenses</span><span class="p">[</span><span class="s1">&#39;rsep[h-1Mpc]&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">lenses</span><span class="p">[</span><span class="s1">&#39;rsep[h-1Mpc]&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">lenses</span><span class="p">[</span><span class="s1">&#39;zred&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">lenses</span><span class="p">[</span><span class="s1">&#39;zred&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mf">0.33</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">lenses</span><span class="p">[</span><span class="s1">&#39;rsep[h-1Mpc]&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">lenses</span><span class="p">[</span><span class="s1">&#39;rsep[h-1Mpc]&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mf">0.4</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no of bins in first selection cut : </span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">np</span>.sum(idx))
 </pre></div>
 </div>
@@ -138,7 +139,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/var/folders/zy/tqkfn5fx2q36p3nvhdgvytcw0000gn/T/ipykernel_63554/3783387286.py:3: FutureWarning: The &#39;delim_whitespace&#39; keyword in pd.read_csv is deprecated and will be removed in a future version. Use ``sep=&#39;\s+&#39;`` instead
+/var/folders/zy/tqkfn5fx2q36p3nvhdgvytcw0000gn/T/ipykernel_72280/1342159877.py:5: FutureWarning: The &#39;delim_whitespace&#39; keyword in pd.read_csv is deprecated and will be removed in a future version. Use ``sep=&#39;\s+&#39;`` instead
   lenses = pd.read_csv(len_path, delim_whitespace=1)
 </pre></div></div>
 </div>
@@ -148,7 +149,7 @@
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Index([&#39;ra&#39;, &#39;dec&#39;, &#39;rsep[h-1Mpc]&#39;, &#39;zred&#39;], dtype=&#39;object&#39;)
-no of bins in first selection cut : 70848
+no of bins in first selection cut : 51215
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -161,8 +162,16 @@ no of bins in first selection cut : 70848
 <div class="admonition note">
 <p class="admonition-title fa fa-exclamation-circle">Exercise:</p>
 <ul class="simple">
-<li><p>Given that you have a weak lensing pipeline, measure the signals around the galaxies as per the selection in the previous step.</p></li>
+<li><p>Given that you have a weak lensing pipeline, measure the signals around the galaxies as per the selection in the previous step. We suggest you to use radial range from 0.01 - 3 h-1 Mpc in order to capture the inner profile too.</p></li>
 </ul>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </section>
 </section>
