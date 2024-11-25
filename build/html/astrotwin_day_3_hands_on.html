@@ -198,22 +198,6 @@ these clusters using the shape catalogue from SDSS (<a class="reference external
 <span class="c1"># se1 and se2 - source ellipticities</span>
 <span class="k">def</span> <span class="nf">get_et</span><span class="p">(</span><span class="n">lra</span><span class="p">,</span> <span class="n">ldec</span><span class="p">,</span> <span class="n">sra</span><span class="p">,</span> <span class="n">sdec</span><span class="p">,</span> <span class="n">se1</span><span class="p">,</span> <span class="n">se2</span><span class="p">):</span>
     <span class="c1"># angle_in_radian = angle_in_degrees * np.pi/180</span>
-    <span class="n">lra</span>  <span class="o">=</span> <span class="o">??</span>
-    <span class="c1"># fill up the blanks</span>
-    <span class="n">ldec</span> <span class="o">=</span> <span class="o">??</span>
-    <span class="n">sra</span>  <span class="o">=</span> <span class="o">??</span>
-    <span class="n">sdec</span> <span class="o">=</span> <span class="o">??</span>
-    <span class="c1"># c_theta = cos_theta, s_theta = sin_theta</span>
-    <span class="c1"># use the equations above and complete the expressions</span>
-    <span class="n">c_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="err">??</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">sdec</span><span class="p">)</span> <span class="o">*</span> <span class="err">??</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ldec</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="err">??</span><span class="p">)</span>
-    <span class="n">s_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">c_theta</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-    <span class="c1"># phi to get the compute the tangential shear</span>
-    <span class="n">c_phi</span>   <span class="o">=</span> <span class="err">??</span> <span class="o">*</span><span class="mf">1.0</span><span class="o">/??</span>
-    <span class="n">s_phi</span>   <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ldec</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">sdec</span><span class="p">)</span> <span class="o">+</span> <span class="err">??</span> <span class="p">)</span><span class="o">*</span><span class="mf">1.0</span><span class="o">/</span><span class="n">s_theta</span>
-    <span class="c1"># tangential shear</span>
-    <span class="n">e_t</span>     <span class="o">=</span> <span class="o">-</span> <span class="n">se1</span><span class="o">*</span><span class="p">(</span><span class="err">??</span><span class="p">)</span> <span class="err">??</span> <span class="n">se2</span><span class="o">*</span><span class="p">(</span><span class="err">??</span><span class="p">)</span>
-
     <span class="k">return</span> <span class="n">e_t</span>
 <br/></pre></div>
 </div>
@@ -240,10 +224,6 @@ these clusters using the shape catalogue from SDSS (<a class="reference external
     <span class="n">gee</span> <span class="o">=</span> <span class="mf">4.301e-9</span> <span class="c1">#km^2 Mpc M_sun^-1 s^-2 gravitational constant</span>
     <span class="n">cee</span> <span class="o">=</span> <span class="mf">3e5</span> <span class="c1">#km s^-1</span>
     <span class="c1"># sigma_crit_calculations for a given lense-source pair</span>
-    <span class="n">sigm_crit_inv</span> <span class="o">=</span> <span class="err">??</span> <span class="o">*</span> <span class="n">cc</span><span class="o">.</span><span class="n">angular_diameter_distance_z1z2</span><span class="p">(</span><span class="n">lzred</span><span class="p">,</span> <span class="n">szred</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">lzred</span><span class="p">)</span><span class="o">**</span><span class="err">??</span> <span class="o">*</span> <span class="mf">1.0</span><span class="o">/??</span>
-    <span class="n">sigm_crit_inv</span> <span class="o">=</span> <span class="n">sigm_crit_inv</span> <span class="o">*</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">gee</span><span class="o">*</span><span class="mf">1.0</span><span class="o">/</span><span class="n">cee</span><span class="o">**</span><span class="mi">2</span>
-    <span class="n">sigm_crit_inv</span> <span class="o">=</span> <span class="mf">1e12</span><span class="o">*</span><span class="n">sigm_crit_inv</span> <span class="c1">#esd&#39;s are in pc not in Mpc</span>
-
     <span class="k">return</span> <span class="n">sigm_crit_inv</span>
 <br/></pre></div>
 </div>
@@ -263,11 +243,6 @@ these clusters using the shape catalogue from SDSS (<a class="reference external
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_xyz</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">):</span>
-    <span class="n">ra</span> <span class="o">=</span> <span class="n">ra</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/??</span>
-    <span class="n">dec</span> <span class="o">=</span> dec*<span class="o">??</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">dec</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">ra</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="err">??</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="err">??</span><span class="p">)</span>
-    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="err">??</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
 </pre></div>
 </div>
