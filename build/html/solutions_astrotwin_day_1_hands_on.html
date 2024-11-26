@@ -84,7 +84,7 @@
 <h1>Day 1 Solutions<a class="headerlink" href="#Day-1-Solutions" title="Link to this heading"></a></h1>
 <p>It contains things covered on day-1 of hands on session for weak lensing at AstroTwin Colo 2024.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#loading the required packages</span>
@@ -240,7 +240,7 @@ no of bins in first selection cut : 3642
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.cosmology</span> <span class="kn">import</span> <span class="n">FlatLambdaCDM</span>
@@ -276,26 +276,32 @@ Text(0, 0.5, &#39;$d_{\\rm com} {\\rm [h^{-1}Mpc]}$&#39;)
 <img alt="_images/solutions_astrotwin_day_1_hands_on_8_1.png" src="_images/solutions_astrotwin_day_1_hands_on_8_1.png" />
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Om0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.8</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">omg</span> <span class="ow">in</span> <span class="n">Om0</span><span class="p">:</span>
     <span class="n">cc</span> <span class="o">=</span> <span class="n">FlatLambdaCDM</span><span class="p">(</span><span class="n">H0</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">Om0</span><span class="o">=</span><span class="n">omg</span><span class="p">)</span> <span class="c1"># H0=100 so that we can get distance in units of Mpc h-1</span>
-    <span class="n">zred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">zred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zred</span><span class="p">,</span> <span class="n">cc</span><span class="o">.</span><span class="n">angular_diameter_distance</span><span class="p">(</span><span class="n">zred</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\Omega_m$ = </span><span class="si">%2.2f</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">omg</span>)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$z_{\rm red}$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$z_{\rm red}$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$d_{\rm ang} {\rm [h^{-1}Mpc]}$&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
-</pre></div>
+<div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
@@ -306,7 +312,7 @@ Text(0, 0.5, &#39;$d_{\\rm ang} {\\rm [h^{-1}Mpc]}$&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/solutions_astrotwin_day_1_hands_on_9_1.png" src="_images/solutions_astrotwin_day_1_hands_on_9_1.png" />
+<img alt="_images/solutions_astrotwin_day_1_hands_on_10_1.png" src="_images/solutions_astrotwin_day_1_hands_on_10_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -336,7 +342,7 @@ Text(0, 0.5, &#39;$d_{\\rm lum} {\\rm [h^{-1}Mpc]}$&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/solutions_astrotwin_day_1_hands_on_10_1.png" src="_images/solutions_astrotwin_day_1_hands_on_10_1.png" />
+<img alt="_images/solutions_astrotwin_day_1_hands_on_11_1.png" src="_images/solutions_astrotwin_day_1_hands_on_11_1.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
