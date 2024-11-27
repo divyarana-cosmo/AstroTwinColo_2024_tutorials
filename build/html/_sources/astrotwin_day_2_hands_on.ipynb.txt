@@ -1027,13 +1027,13 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 2,
    "metadata": {
     "scrolled": true
    },
    "outputs": [],
    "source": [
-    "%time nnids,distances = query_neighbour_points(coords[:1000],rmax=15, verbose=False)"
+    "%time nnids,distances = query_neighbour_points(coords[:1000],coords[:1000],rmax=15, verbose=False)"
    ]
   },
   {

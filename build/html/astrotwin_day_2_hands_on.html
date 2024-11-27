@@ -342,7 +342,7 @@ randomly picked indices:
 </section>
 <section id="On-sky-distance-between-two-points-on-the-surface-of-a-unit-sphere.">
 <h2><code class="docutils literal notranslate"><span class="pre">On-sky</span> <span class="pre">distance</span></code> between two points on the surface of a unit sphere.<a class="headerlink" href="#On-sky-distance-between-two-points-on-the-surface-of-a-unit-sphere." title="Link to this heading"></a></h2>
-<p><img alt="b0b0b5a779b2435b8ad4c02e99cf126e" class="no-scaled-link" src="_images/Equitorial_coord_sys.jpg" style="width: 400px; height: 300px;" /></p>
+<p><img alt="184b89d2a9814bf6aef974f3e974fc1a" class="no-scaled-link" src="_images/Equitorial_coord_sys.jpg" style="width: 400px; height: 300px;" /></p>
 <p>Given the spherical coordinate system, we can express the points in as</p>
 <p><span class="math notranslate nohighlight">\(\vec{r_i} = r_i \cdot (\sin(90 -\delta_i) \cos\alpha_i \ \hat{x}+ \sin(90 -\delta_i) \sin\alpha_i \ \hat{y} + \cos(90 -\delta_i) \ \hat{z})\)</span>, <span class="math notranslate nohighlight">\(\hspace{0.2cm}\)</span>for <span class="math notranslate nohighlight">\(\mathrm{i \in (1,2)}\)</span>. Here <span class="math notranslate nohighlight">\(\alpha_i\)</span> and <span class="math notranslate nohighlight">\(\delta_i\)</span> are the right ascension and declination for <span class="math notranslate nohighlight">\(i^{\rm th}\)</span> point.</p>
 <p>We will first compute the cosine of the angle <span class="math notranslate nohighlight">\(\theta\)</span> between the points using :</p>
@@ -393,7 +393,7 @@ randomly picked indices:
 </ul>
 </div>
 <p>I get the following:</p>
-<p><img alt="0ed10d2a471149199d34e36748eca761" class="no-scaled-link" src="_images/onsky_distance_test.png" style="width: 300px; height: 70px;" /></p>
+<p><img alt="fe072bd3623c43be90ff97deb01f9709" class="no-scaled-link" src="_images/onsky_distance_test.png" style="width: 300px; height: 70px;" /></p>
 </section>
 <section id="Brute-force-search-for-neighbour-objects-within-a-specified-distance">
 <h2>Brute force search for neighbour objects within a specified distance<a class="headerlink" href="#Brute-force-search-for-neighbour-objects-within-a-specified-distance" title="Link to this heading"></a></h2>
@@ -605,8 +605,8 @@ Accessing the neighbour coordinates of the 15th object:
 </div>
 <p>I’m plotting the neighbours of <span class="math notranslate nohighlight">\(15^{th}\)</span> point from the catalog. And also printing their <code class="docutils literal notranslate"><span class="pre">indices</span></code> and <code class="docutils literal notranslate"><span class="pre">distances</span></code> to compare the stored distances by eye!</p>
 <p>Point marked as <span class="math notranslate nohighlight">\(\star\)</span> is the <span class="math notranslate nohighlight">\(15^{th}\)</span> point. Other points are its neighbours.</p>
-<p><img alt="df9f5e1303354c2b8e3cb81ed3694915" class="no-scaled-link" src="_images/neighbours_of_15th_obj.png" style="width: 500px; height: 400px;" /></p>
-<p><img alt="23b04a31a77b43a48a3acd64411f6f55" class="no-scaled-link" src="_images/neighbours_printed.png" style="width: 300px; height: 80px;" /></p>
+<p><img alt="87a818e359114e5ea448e3f45f169dd8" class="no-scaled-link" src="_images/neighbours_of_15th_obj.png" style="width: 500px; height: 400px;" /></p>
+<p><img alt="bbed4c2b6e784122a3d7546b9dd3052a" class="no-scaled-link" src="_images/neighbours_printed.png" style="width: 300px; height: 80px;" /></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
@@ -758,7 +758,7 @@ Accessing the neighbour coordinates of the 15th object:
 </pre></div>
 </div>
 </div>
-<p><img alt="244b00f8480c45288082a258947db8cf" class="no-scaled-link" src="_images/coordinate_conversion_test.png" style="width: 400px; height: 200px;" /></p>
+<p><img alt="7484e80168244bf38ba0678ef5bc0072" class="no-scaled-link" src="_images/coordinate_conversion_test.png" style="width: 400px; height: 200px;" /></p>
 </section>
 <section id="Compare-the-output-of-our-brute-force-algorithm-with-cKDTree-algorithm-on-few-Demo-objects">
 <h3>Compare the output of our brute force algorithm with cKDTree algorithm on few Demo objects<a class="headerlink" href="#Compare-the-output-of-our-brute-force-algorithm-with-cKDTree-algorithm-on-few-Demo-objects" title="Link to this heading"></a></h3>
@@ -844,10 +844,10 @@ Initializing with sphere of radius, r=1.
 <p><strong>Reminder:</strong> full catalog has about 2,20,000 objects… and k-d tree found neighbours for each one of them in 1-2 seconds. (This time will vary depending on your computer’s capability.)</p>
 <p>Now let’s use the brute force method only for 1000 objects.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> nnids,distances = query_neighbour_points(coords[:1000],rmax=15, verbose=False)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> nnids,distances = query_neighbour_points(coords[:1000],coords[:1000],rmax=15, verbose=False)
 </pre></div>
 </div>
 </div>
