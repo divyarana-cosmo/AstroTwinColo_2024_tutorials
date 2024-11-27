@@ -23,7 +23,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Day 3 - Get the Weak Lensing Signals" href="astrotwin_day_3_hands_on.html" />
+    <link rel="next" title="Day 2 Solutions" href="solutions_astrotwin_day_2_hands_on.html" />
     <link rel="prev" title="Day 1 Solutions" href="solutions_astrotwin_day_1_hands_on.html" /> 
 </head>
 
@@ -71,6 +71,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#Congratulations!-Now-you-have-learnt-to--">Congratulations! Now you have learnt to -</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="solutions_astrotwin_day_2_hands_on.html">Day 2 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_3_hands_on.html">Day 3 - Get the Weak Lensing Signals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_4_hands_on.html">Day 4 - Model the weak lensing signal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_5_hands_on.html">Day 5 - Environmental dependence of matter profiles</a></li>
@@ -341,7 +342,7 @@ randomly picked indices:
 </section>
 <section id="On-sky-distance-between-two-points-on-the-surface-of-a-unit-sphere.">
 <h2><code class="docutils literal notranslate"><span class="pre">On-sky</span> <span class="pre">distance</span></code> between two points on the surface of a unit sphere.<a class="headerlink" href="#On-sky-distance-between-two-points-on-the-surface-of-a-unit-sphere." title="Link to this heading"></a></h2>
-<p><img alt="e4eb0ddbb2b94f8aa60dfde3e6a65f24" class="no-scaled-link" src="_images/Equitorial_coord_sys.jpg" style="width: 400px; height: 300px;" /></p>
+<p><img alt="9afd018314374b6e9bc849eaf438f253" class="no-scaled-link" src="_images/Equitorial_coord_sys.jpg" style="width: 400px; height: 300px;" /></p>
 <p>Given the spherical coordinate system, we can express the points in as</p>
 <p><span class="math notranslate nohighlight">\(\vec{r_i} = r_i \cdot (\sin(90 -\delta_i) \cos\alpha_i \ \hat{x}+ \sin(90 -\delta_i) \sin\alpha_i \ \hat{y} + \cos(90 -\delta_i) \ \hat{z})\)</span>, <span class="math notranslate nohighlight">\(\hspace{0.2cm}\)</span>for <span class="math notranslate nohighlight">\(\mathrm{i \in (1,2)}\)</span>. Here <span class="math notranslate nohighlight">\(\alpha_i\)</span> and <span class="math notranslate nohighlight">\(\delta_i\)</span> are the right ascension and declination for <span class="math notranslate nohighlight">\(i^{\rm th}\)</span> point.</p>
 <p>We will first compute the cosine of the angle <span class="math notranslate nohighlight">\(\theta\)</span> between the points using :</p>
@@ -392,7 +393,7 @@ randomly picked indices:
 </ul>
 </div>
 <p>I get the following:</p>
-<p><img alt="58ac2a85cc5c4597a8a876b719f1ff08" class="no-scaled-link" src="_images/onsky_distance_test.png" style="width: 300px; height: 70px;" /></p>
+<p><img alt="9e49215f6eaa41659c855eadce1d629d" class="no-scaled-link" src="_images/onsky_distance_test.png" style="width: 300px; height: 70px;" /></p>
 </section>
 <section id="Brute-force-search-for-neighbour-objects-within-a-specified-distance">
 <h2>Brute force search for neighbour objects within a specified distance<a class="headerlink" href="#Brute-force-search-for-neighbour-objects-within-a-specified-distance" title="Link to this heading"></a></h2>
@@ -604,8 +605,8 @@ Accessing the neighbour coordinates of the 15th object:
 </div>
 <p>I’m plotting the neighbours of <span class="math notranslate nohighlight">\(15^{th}\)</span> point from the catalog. And also printing their <code class="docutils literal notranslate"><span class="pre">indices</span></code> and <code class="docutils literal notranslate"><span class="pre">distances</span></code> to compare the stored distances by eye!</p>
 <p>Point marked as <span class="math notranslate nohighlight">\(\star\)</span> is the <span class="math notranslate nohighlight">\(15^{th}\)</span> point. Other points are its neighbours.</p>
-<p><img alt="87aa3bbb4b60436cae4d64639cf0f344" class="no-scaled-link" src="_images/neighbours_of_15th_obj.png" style="width: 500px; height: 400px;" /></p>
-<p><img alt="36d25a29f7564d7eb18550403249c9ec" class="no-scaled-link" src="_images/neighbours_printed.png" style="width: 300px; height: 80px;" /></p>
+<p><img alt="f05fdf3740974b0f953877a982bbdb09" class="no-scaled-link" src="_images/neighbours_of_15th_obj.png" style="width: 500px; height: 400px;" /></p>
+<p><img alt="9fd78307ca464a73a3e9d7a75eae5619" class="no-scaled-link" src="_images/neighbours_printed.png" style="width: 300px; height: 80px;" /></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
@@ -757,7 +758,7 @@ Accessing the neighbour coordinates of the 15th object:
 </pre></div>
 </div>
 </div>
-<p><img alt="ca1debe4d6a3417f83620f038202a3b1" class="no-scaled-link" src="_images/coordinate_conversion_test.png" style="width: 400px; height: 200px;" /></p>
+<p><img alt="538644cf95a44bfba8ae042493c4a1b1" class="no-scaled-link" src="_images/coordinate_conversion_test.png" style="width: 400px; height: 200px;" /></p>
 </section>
 <section id="Compare-the-output-of-our-brute-force-algorithm-with-cKDTree-algorithm-on-few-Demo-objects">
 <h3>Compare the output of our brute force algorithm with cKDTree algorithm on few Demo objects<a class="headerlink" href="#Compare-the-output-of-our-brute-force-algorithm-with-cKDTree-algorithm-on-few-Demo-objects" title="Link to this heading"></a></h3>
@@ -867,7 +868,7 @@ Initializing with sphere of radius, r=1.
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="solutions_astrotwin_day_1_hands_on.html" class="btn btn-neutral float-left" title="Day 1 Solutions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="astrotwin_day_3_hands_on.html" class="btn btn-neutral float-right" title="Day 3 - Get the Weak Lensing Signals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="solutions_astrotwin_day_2_hands_on.html" class="btn btn-neutral float-right" title="Day 2 Solutions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
