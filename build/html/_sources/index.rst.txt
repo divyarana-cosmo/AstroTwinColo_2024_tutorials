@@ -21,6 +21,7 @@ AstroTwinColo 2024 tutorial documentation
    astrotwin_day_3_hands_on
    solutions_astrotwin_day_3_hands_on
    astrotwin_day_4_hands_on
+   solutions_astrotwin_day_4_hands_on
    astrotwin_day_5_hands_on
 
 
