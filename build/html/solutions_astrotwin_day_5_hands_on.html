@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Day 3 Solutions &mdash; AstroTwinColo_2024 2024 documentation</title>
+  <title>Day 5 Solutions &mdash; AstroTwinColo_2024 2024 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=7ab3649f" />
       <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
@@ -56,7 +56,8 @@
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_4_hands_on.html">Day 4 - Model the weak lensing signal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="solutions_astrotwin_day_4_hands_on.html">Day 4 Solutions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrotwin_day_5_hands_on.html">Day 5 - Environmental dependence of matter profiles</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Day 3 Solutions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Day 5 Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#modelling-part">modelling part</a></li>
 </ul>
 
         </div>
@@ -73,7 +74,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Day 3 Solutions</li>
+      <li class="breadcrumb-item active">Day 5 Solutions</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/solutions_astrotwin_day_5_hands_on.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
@@ -83,8 +84,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="Day-3-Solutions">
-<h1>Day 3 Solutions<a class="headerlink" href="#Day-3-Solutions" title="Link to this heading"></a></h1>
+  <section id="Day-5-Solutions">
+<h1>Day 5 Solutions<a class="headerlink" href="#Day-5-Solutions" title="Link to this heading"></a></h1>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -441,12 +442,162 @@
 <img alt="_images/solutions_astrotwin_day_5_hands_on_13_0.png" src="_images/solutions_astrotwin_day_5_hands_on_13_0.png" />
 </div>
 </div>
+</section>
+<section id="modelling-part">
+<h1>modelling part<a class="headerlink" href="#modelling-part" title="Link to this heading"></a></h1>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span>
+
+<span class="k">class</span> <span class="nc">constants</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Useful constants&quot;&quot;&quot;</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="mf">4.301e-9</span> <span class="c1">#km^2 Mpc M_sun^-1 s^-2 gravitational constant</span>
+    <span class="n">H0</span> <span class="o">=</span> <span class="mf">100.</span> <span class="c1">#h kms-1 Mpc-1 hubble constant at present</span>
+    <span class="n">omg_m</span> <span class="o">=</span> <span class="mf">0.315</span> <span class="c1">#omega_matter</span>
+    <span class="n">not_so_tiny</span> <span class="o">=</span> <span class="mf">1e-24</span>
+<span class="k">class</span> <span class="nc">halo</span><span class="p">(</span><span class="n">constants</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Useful functions for weak lensing signal modelling&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">m_tot</span><span class="p">,</span><span class="n">con_par</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m_tot</span> <span class="o">=</span> <span class="n">m_tot</span> <span class="c1"># total mass of the halo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">con_par</span> <span class="c1"># concentration parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rho_crt</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">H0</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="p">)</span> <span class="c1"># rho critical</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rho_crt</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">omg_m</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r_200</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">m_tot</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">200</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">rho_crt</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">omg_m</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span> <span class="c1"># radius defines size of the halo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rho_0</span> <span class="o">=</span> <span class="n">con_par</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span><span class="n">m_tot</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">r_200</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">con_par</span><span class="p">)</span><span class="o">-</span><span class="n">con_par</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">con_par</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_sigma</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_sigma_cir</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigma_cir_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="nb">print</span><span class="p">((</span><span class="s2">&quot;Intialing NFW parameters</span><span class="se">\n</span><span class="s2"> m_tot = </span><span class="si">%s</span><span class="s2"> M_sun</span><span class="se">\n</span><span class="s2">conc_parm = </span><span class="si">%s</span><span class="se">\n</span><span class="s2">rho_0 = </span><span class="si">%s</span><span class="s2"> M_sun/Mpc^3</span><span class="se">\n</span><span class="s2"> r_s = </span><span class="si">%s</span><span class="s2"> Mpc&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">m_tot</span><span class="p">,</span><span class="n">con_par</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">rho_0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">r_200</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">nfw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">r</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;given r, this gives nfw profile as per the instantiated parameters&quot;&quot;&quot;</span>
+        <span class="n">r_s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_200</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span>
+        <span class="n">value</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rho_0</span><span class="o">/</span><span class="p">((</span><span class="n">r</span><span class="o">/</span><span class="n">r_s</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">r</span><span class="o">/</span><span class="n">r_s</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">sigma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="n">r_s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_200</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">r_s</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">rho_0</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+           <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="p">])</span>
+        <span class="n">sig</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">*</span><span class="n">r</span>
+        <span class="n">c</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">i</span><span class="o">/</span><span class="n">r_s</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">arccosh</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span>
+            <span class="n">sig</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="n">k</span>
+            <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">sig</span>
+
+    <span class="k">def</span> <span class="nf">avg_sigma_nfw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">r</span><span class="p">):</span>
+        <span class="n">r_s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_200</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">r_s</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">rho_0</span>
+        <span class="n">c</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="p">])</span>
+        <span class="n">sig</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">*</span><span class="n">r</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">i</span><span class="o">/</span><span class="n">r_s</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccosh</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="mf">2.0</span><span class="o">/</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+            <span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="mf">2.0</span><span class="o">/</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+            <span class="n">sig</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="n">k</span>
+            <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">sig</span>
+
+
+    <span class="k">def</span> <span class="nf">delta_sigma</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">r</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;difference between mean sigma and average over the circle of radius R&quot;&quot;&quot;</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">avg_sigma_nfw</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">val</span>
+
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;segment for the parent halo contribution for the daughter halo at distance r0&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">sigma_cir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">r0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;sigma mean over a circle using the spline given below&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_sigma_cir</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">init_sigma_cir_spl</span><span class="p">(</span><span class="n">r0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma_cir_dict</span><span class="p">[</span><span class="s2">&quot;Rmax&quot;</span><span class="p">]:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">j</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r0</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">r0</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">j</span><span class="p">))),</span> <span class="mf">0.</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma_cir_dict</span><span class="p">[</span><span class="s2">&quot;Rmin&quot;</span><span class="p">]:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma_cir_dict</span><span class="p">[</span><span class="s2">&quot;Sigmamin&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">sig_cir_spl</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">init_sigma_cir_spl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">r0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;spline for the satellite at a distance r0 from the center for parents contribution averaged over a circle&quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SPLINE READY FOR AVERAGING OVER CIRCLE&quot;</span><span class="p">)</span>
+        <span class="n">rdbin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">r_200</span><span class="p">),</span><span class="mi">50</span><span class="p">)</span>
+        <span class="n">des_cir</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">*</span><span class="n">rdbin</span>
+        <span class="k">for</span> <span class="n">i</span>  <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">rdbin</span><span class="p">)):</span>
+            <span class="n">des_cir</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">j</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r0</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">rdbin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">r0</span><span class="o">*</span><span class="n">rdbin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">j</span><span class="p">))),</span> <span class="mf">0.</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sig_cir_spl</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">rdbin</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">des_cir</span><span class="p">),</span><span class="n">kind</span> <span class="o">=</span> <span class="s2">&quot;cubic&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigma_cir_dict</span><span class="p">[</span><span class="s2">&quot;Rmax&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rdbin</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigma_cir_dict</span><span class="p">[</span><span class="s2">&quot;Rmin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rdbin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigma_cir_dict</span><span class="p">[</span><span class="s2">&quot;Sigmamin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">des_cir</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_sigma_cir</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">delta_sigma_dau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">r0</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span>  <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rp</span><span class="p">:</span> <span class="n">rp</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma_cir</span><span class="p">(</span><span class="n">rp</span><span class="p">,</span><span class="n">r0</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">r</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma_cir</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">r0</span><span class="p">)</span>
+        <span class="c1">#value =  self.sigma_cir(r,r0)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">proj_sat_profile</span><span class="p">(</span><span class="n">R</span><span class="p">):</span>
+        <span class="s2">&quot;assumed dummy profile&quot;</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="n">R</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">rdbin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">mhpart</span> <span class="o">=</span> <span class="mf">1e14</span>
+    <span class="n">mhdaut</span> <span class="o">=</span> <span class="mf">1e12</span>
+    <span class="n">msteldaut</span> <span class="o">=</span> <span class="mf">1e10</span>
+
+    <span class="n">h_p</span> <span class="o">=</span> <span class="n">halo</span><span class="p">(</span><span class="n">mhpart</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">h_d</span> <span class="o">=</span> <span class="n">halo</span><span class="p">(</span><span class="n">mhdaut</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">rd_dist</span> <span class="o">=</span>  <span class="mf">0.3</span>
+    <span class="n">rsepmin</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="n">rsepmax</span> <span class="o">=</span> <span class="mf">0.6</span>
+    <span class="n">delta_part</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">*</span><span class="n">rdbin</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rdbin</span><span class="p">)):</span>
+        <span class="c1">#delta_part[i] = h_p.delta_sigma_dau(rdbin[i], rd_dist)</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rsep</span><span class="p">:</span> <span class="n">proj_sat_profile</span><span class="p">(</span><span class="n">rsep</span><span class="p">)</span> <span class="o">*</span><span class="n">h_p</span><span class="o">.</span><span class="n">delta_sigma_dau</span><span class="p">(</span><span class="n">rdbin</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">rsep</span><span class="p">),</span> <span class="n">rsepmin</span><span class="p">,</span> <span class="n">rsepmax</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">delta_part</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="o">/</span><span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rsep</span><span class="p">:</span> <span class="n">proj_sat_profile</span><span class="p">(</span><span class="n">rsep</span><span class="p">),</span> <span class="n">rsepmin</span><span class="p">,</span> <span class="n">rsepmax</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rdbin</span><span class="p">,</span><span class="n">delta_part</span><span class="o">/</span><span class="mf">1e12</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Parent&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rdbin</span><span class="p">,(</span><span class="n">h_d</span><span class="o">.</span><span class="n">delta_sigma</span><span class="p">(</span><span class="n">rdbin</span><span class="p">)</span> <span class="o">+</span> <span class="n">msteldaut</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">rdbin</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="mf">1e12</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Daughter&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rdbin</span><span class="p">,(</span><span class="n">delta_part</span> <span class="o">+</span> <span class="n">msteldaut</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">rdbin</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">h_d</span><span class="o">.</span><span class="n">delta_sigma</span><span class="p">(</span><span class="n">rdbin</span><span class="p">))</span><span class="o">/</span><span class="mf">1e12</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Total&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">rd_dist</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R [{ \rm h^{-1}Mpc}]$&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta \Sigma [{\rm h M_\odot pc^{-2}}]$&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;test.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<br/><br/></pre></div>
 </div>
 </div>
 </section>
